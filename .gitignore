@@ -29,4 +29,5 @@ pnpm-debug.log*
 /src/middleware/firebase/firebaseConfig.ts
 /src/middleware/firebase/firebaseMiddleware.ts
 
-
+# composables folder inner folders and files (except README.md)
+/src/composables/store/
