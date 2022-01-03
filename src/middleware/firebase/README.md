@@ -1,0 +1,5 @@
+## middleware/firebase/
+
+The **src/middleware/firebase** folder holds two files that control the interaction between the Frontend and the firebase backend of the app. Said files are, respectively:
+- **firebaseConfig.ts**: This file contains the configuration info of the firebase backend. As it holds sensitive information it is not included in the repository, nor will it be in the future.
+- **firebaseMiddleware.ts**: This files serves as a bridge (middleware) between the Frontend and the firebase backend. In the *firebaseMiddleware.ts* file are function declarations that are used to interact with the firebase backend, and gets exported to the app without sharing sensitive information. This file was added to the .gitignore file to avoid it being committed to the repository until deployment, when it will be removed from the .gitignore file.
