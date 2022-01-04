@@ -5,7 +5,7 @@ Both apps are build using VueJS and Firebase, yet there are major differences be
 - The first one was my entry point to VueJS, Vuex and Firebase; and even tho fully functional, there are major flaws codewise.
 - This project is developed with TypeScript (and Vue), and it's my first TypeScript project, yet my understanding of the Vue ecosystem is much higher.
 - As opposed to the first project, this one is built with VueJS composition API. Composable functions entirely replace Vuex for state management.
-- All UI design is made with pure CSS on both apps.
+- UI design wise, it was made with pure CSS for the first app, whilst this one uses [Naive UI](https://www.naiveui.com/) components imported [on demand](https://www.naiveui.com/en-US/os-theme/docs/import-on-demand).
 
 ### Note:
 The reason I didn't simply replace my first portfolio with this one is to showcase my progress with the Vue ecosystem and also to built a TypeScript project from scratch.
