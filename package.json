@@ -11,6 +11,7 @@
     "core-js": "^3.6.5",
     "firebase": "^9.6.1",
     "vue": "^3.0.0",
+    "vue-material-design-icons": "^5.0.0",
     "vue-router": "^4.0.0-0"
   },
   "devDependencies": {
