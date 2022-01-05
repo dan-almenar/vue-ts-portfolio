@@ -4,8 +4,8 @@
     <div class="icon">
       <HomeIcon
       :title="lang === 'english' ? 'Home' : 'Inicio'"
-      size="40"
-      fillColor="black"
+      :size="iconSize"
+      :fillColor="routeName === 'Home' ? 'firebrick' : 'black'"
       />
       </div>
     {{ lang === 'english' ? 'Home' : 'Inicio' }}
@@ -14,8 +14,8 @@
       <div class="icon">
       <CodeJsonIcon
       :title="lang === 'english' ? 'Projects' : 'Projectos'"
-      size="40"
-      fillColor="black"
+      :size="iconSize"
+      :fillColor="routeName === 'Projects' ? 'firebrick' : 'black'"
       />
       </div>
     {{ lang === 'english' ? 'Projects' : 'Projectos' }}
@@ -24,8 +24,8 @@
       <div class="icon">
       <HammerScrewdriverIcon
       :title="lang === 'english' ? 'Skills' : 'Habilidades'"
-      size="40"
-      fillColor="black"      
+      :size="iconSize"
+      :fillColor="routeName === 'LangsAndTools' ? 'firebrick' : 'black'"
       />
       </div>
     {{ lang === 'english' ? 'Skills' : 'Habilidades' }}
@@ -34,8 +34,8 @@
       <div class="icon">
       <EmailIcon
       :title="lang === 'english' ? 'Contact' : 'Contacto'"
-      size="40"
-      fillColor="black"      
+      :size="iconSize"
+      :fillColor="currentRoute === 'Contact' ? 'firebrick' : 'black'"
       />
       </div>
     {{ lang === 'english' ? 'Contact' : 'Contacto' }}
@@ -44,8 +44,8 @@
       <div class="icon">
       <TranslateIcon
       :title="lang === 'english' ? 'Español' : 'English'"
-      size="40"
-      fillColor="black"      
+      :size="iconSize"
+      fillColor="black"
       />
       </div>
     {{ lang === 'english' ? 'Español' : 'English' }}
@@ -63,8 +63,9 @@
 </template>
 
 <script lang="ts">
+import { useRoute } from 'vue-router'
 import { switchLanguage }  from '@/composables/store/store'
-import { inject, defineComponent } from 'vue'
+import { inject, defineComponent, computed } from 'vue'
 import HomeIcon from 'vue-material-design-icons/Home.vue'
 import CodeJsonIcon from 'vue-material-design-icons/CodeJson.vue'
 import HammerScrewdriverIcon from 'vue-material-design-icons/HammerScrewdriver.vue'
@@ -75,10 +76,15 @@ export default defineComponent({
   setup() {
     const switchLang = switchLanguage
     const lang = inject('lang')
+    const iconSize = 20
+    const route = useRoute()
+    const routeName = computed(() => route.name)
     
     return {
       lang,
-      switchLang
+      switchLang,
+      iconSize,
+      routeName,
     }
   },
   components: {
@@ -99,16 +105,19 @@ export default defineComponent({
   justify-content: center;
   align-items: center;
   display: flex;
+  position: fixed;
+  background: lightgrey;
 }
 
 #nav a {
   font-weight: bold;
+  font-size: .8rem;
   color: #2c3e50;
-  margin: 30px;
+  margin: 15px 50px;
 }
 
 #nav a.router-link-exact-active {
-  color: red;
+  color: firebrick;
 }
 
 button {
@@ -117,6 +126,7 @@ button {
   border: none;
   font-weight: bold;
   color: #2c3e50;
-  font-size: 1rem;  
+  font-size: .8rem;
+  color: firebrick;
 }
 </style>

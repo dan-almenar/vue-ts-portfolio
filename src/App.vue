@@ -10,13 +10,11 @@ import { defineComponent, provide } from 'vue'
 
 export default defineComponent({
   setup() {
-    const lang = state.lang
     const switchLang = switchLanguage
 
-    provide('lang', lang)
+    provide('lang', state.lang)
     
     return {
-      lang,
       switchLang
     }
   },
@@ -34,5 +32,4 @@ export default defineComponent({
   text-align: center;
   color: #2c3e50;
 }
-
 </style>
