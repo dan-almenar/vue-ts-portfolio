@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
 import Admin from '@/views/Admin.vue'
-import Bio from '@/views/Bio.vue'
 import Projects from '@/views/Projects.vue'
 import LangsAndTools from '@/views/LangsAndTools.vue'
 
@@ -23,12 +22,6 @@ const routes: Array<RouteRecordRaw> = [
     path: '/admin',
     name: 'Admin',
     component: Admin
-  },
-
-  {
-    path: '/bio',
-    name: 'Bio',
-    component: Bio
   },
 
   {
