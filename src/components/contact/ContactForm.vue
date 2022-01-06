@@ -12,7 +12,7 @@ export default {
         const email: Ref<string> = ref('')
         const message: Ref<string> = ref('')
 
-        const { doc, func } = useSetDoc()
+        const { doc, setDocFunc } = useSetDoc()
 
         const submit = (): void => {
             const formInput: Ref<ContactFormInput> = ref({
@@ -22,7 +22,11 @@ export default {
                 date: new Date(Date.now())
             })
 
-            func(formInput)
+            setDocFunc(formInput)
+            
+            name.value = ''
+            email.value = ''
+            message.value = ''
         }
 
         return {
