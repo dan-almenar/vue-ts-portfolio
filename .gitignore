@@ -32,4 +32,5 @@ pnpm-debug.log*
 # composables folder inner folders and files (except README.md)
 /src/composables/store/
 /src/composables/useSetDoc/
-src/composables/useSignIn/
+/src/composables/useSignIn/
+/src/composables/useGetDocument/
