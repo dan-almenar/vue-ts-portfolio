@@ -1,44 +1,48 @@
 <template>
   <div id="nav">
     <router-link to="/">
-    <div class="icon">
+    <div :class="icon">
       <HomeIcon
       :title="lang === 'english' ? 'Home' : 'Inicio'"
       :size="iconSize"
       :fillColor="routeName === 'Home' ? 'firebrick' : 'black'"
       />
       </div>
-    {{ lang === 'english' ? 'Home' : 'Inicio' }}
+    <span
+    :class="routeName === 'Home' ? 'firebrick-text' : ''">{{ lang === 'english' ? 'Home' : 'Inicio' }}</span>
     </router-link>
     <router-link :to="{ name: 'Projects' }">
       <div class="icon">
       <CodeJsonIcon
       :title="lang === 'english' ? 'Projects' : 'Projectos'"
       :size="iconSize"
-      :fillColor="routeName === 'Projects' ? 'firebrick' : 'black'"
+      :fillColor="routeName === 'Projects' ? 'blue' : 'black'"
       />
       </div>
-    {{ lang === 'english' ? 'Projects' : 'Projectos' }}
+    <span
+    :class="routeName === 'Projects' ? 'blue-text' : ''">{{ lang === 'english' ? 'Projects' : 'Projectos' }}</span>
     </router-link>
     <router-link :to="{ name: 'LangsAndTools' }">
       <div class="icon">
       <HammerScrewdriverIcon
       :title="lang === 'english' ? 'Skills' : 'Habilidades'"
       :size="iconSize"
-      :fillColor="routeName === 'LangsAndTools' ? 'firebrick' : 'black'"
+      :fillColor="routeName === 'LangsAndTools' ? 'orange' : 'black'"
       />
       </div>
-    {{ lang === 'english' ? 'Skills' : 'Habilidades' }}
+    <span
+    :class="routeName === 'LangsAndTools' ? 'orange-text' : ''">{{ lang === 'english' ? 'Skills' : 'Habilidades' }}</span>
     </router-link>
     <router-link :to="{ name: 'Contact' }">
       <div class="icon">
       <EmailIcon
       :title="lang === 'english' ? 'Contact' : 'Contacto'"
       :size="iconSize"
-      :fillColor="currentRoute === 'Contact' ? 'firebrick' : 'black'"
+      :fillColor="routeName === 'Contact' ? 'green' : 'black'"
       />
       </div>
-    {{ lang === 'english' ? 'Contact' : 'Contacto' }}
+    <span
+    :class="routeName === 'Contact' ? 'green-text' : ''">{{ lang === 'english' ? 'Contact' : 'Contacto' }}</span>
     </router-link>
     <button @click="switchLang">
       <div class="icon">
@@ -76,7 +80,7 @@ export default defineComponent({
   setup() {
     const switchLang = switchLanguage
     const lang = inject('lang')
-    const iconSize = 20
+    const iconSize = 30
     const route = useRoute()
     const routeName = computed(() => route.name)
     
@@ -105,19 +109,34 @@ export default defineComponent({
   justify-content: center;
   align-items: center;
   display: flex;
-  position: fixed;
   background: lightgrey;
 }
 
 #nav a {
   font-weight: bold;
-  font-size: .8rem;
+  font-size: 1rem;
   color: #2c3e50;
   margin: 15px 50px;
+  text-decoration: none;
 }
 
-#nav a.router-link-exact-active {
+/* #nav a.router-link-exact-active {
+  color: black;
+} */
+.firebrick-text {
   color: firebrick;
+}
+
+.blue-text {
+  color: blue;
+}
+
+.orange-text {
+  color: orange;
+}
+
+.green-text {
+  color: green;
 }
 
 button {
@@ -127,6 +146,6 @@ button {
   font-weight: bold;
   color: #2c3e50;
   font-size: .8rem;
-  color: firebrick;
+  color: black;
 }
 </style>

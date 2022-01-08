@@ -34,6 +34,7 @@ export default {
             email,
             message,
             submit,
+            doc,
         }
     }
 
