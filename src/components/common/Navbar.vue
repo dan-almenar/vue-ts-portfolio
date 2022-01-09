@@ -1,7 +1,7 @@
 <template>
   <div id="nav">
-    <router-link to="/">
-    <div :class="icon">
+    <router-link :to="{ name: 'Home' }">
+    <div class="icon">
       <HomeIcon
       :title="lang === 'english' ? 'Home' : 'Inicio'"
       :size="iconSize"
@@ -62,8 +62,6 @@
 
 <!-- test code -->
 <!-- end of test code -->
-
-  <router-view/>
 </template>
 
 <script lang="ts">
