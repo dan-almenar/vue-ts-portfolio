@@ -1,5 +1,12 @@
 <template>
-  <div id="nav">
+<div class="wrapper">
+  <div class="logo">
+    <button @click="toggleShowNavbar">
+    <img class="logo-img" :src="require('@/assets/logo.png')" alt="Logo">
+    </button>
+  </div>
+  <div id="nav"
+  :class="showNavbar ? 'visible' : 'hidden'">
     <router-link :to="{ name: 'Home' }">
     <div class="icon">
       <HomeIcon
@@ -9,7 +16,7 @@
       />
       </div>
     <span
-    :class="routeName === 'Home' ? 'firebrick-text' : ''">{{ lang === 'english' ? 'Home' : 'Inicio' }}</span>
+    :class="[routeName === 'Home' ? 'firebrick-text' : '', 'span-tag']">{{ lang === 'english' ? 'Home' : 'Inicio' }}</span>
     </router-link>
     <router-link :to="{ name: 'Projects' }">
       <div class="icon">
@@ -20,7 +27,7 @@
       />
       </div>
     <span
-    :class="routeName === 'Projects' ? 'blue-text' : ''">{{ lang === 'english' ? 'Projects' : 'Projectos' }}</span>
+    :class="[routeName === 'Projects' ? 'blue-text' : '', 'span-tag']">{{ lang === 'english' ? 'Projects' : 'Projectos' }}</span>
     </router-link>
     <router-link :to="{ name: 'LangsAndTools' }">
       <div class="icon">
@@ -31,7 +38,7 @@
       />
       </div>
     <span
-    :class="routeName === 'LangsAndTools' ? 'orange-text' : ''">{{ lang === 'english' ? 'Skills' : 'Habilidades' }}</span>
+    :class="[routeName === 'LangsAndTools' ? 'orange-text' : '', 'span-tag']">{{ lang === 'english' ? 'Skills' : 'Habilidades' }}</span>
     </router-link>
     <router-link :to="{ name: 'Contact' }">
       <div class="icon">
@@ -42,9 +49,15 @@
       />
       </div>
     <span
-    :class="routeName === 'Contact' ? 'green-text' : ''">{{ lang === 'english' ? 'Contact' : 'Contacto' }}</span>
+    :class="[routeName === 'Contact' ? 'green-text' : '', 'span-tag']">{{ lang === 'english' ? 'Contact' : 'Contacto' }}</span>
     </router-link>
-    <button @click="switchLang">
+
+    <!-- There is no active link to the 'Admin' page for its for admin use only.
+    The following router-link tag will be removed for deployment, it remains here
+    just for showcase purposes.
+      <router-link :to="{ name: 'Admin' }">Admin</router-link> -->
+  </div>
+    <button class="lang-btn" @click="switchLang">
       <div class="icon">
       <TranslateIcon
       :title="lang === 'english' ? 'Español' : 'English'"
@@ -52,22 +65,17 @@
       fillColor="black"
       />
       </div>
-    {{ lang === 'english' ? 'Español' : 'English' }}
+    <span class="span-tag">{{ lang === 'english' ? 'Español' : 'English' }}</span>
     </button>
-    <!-- There is no active link to the 'Admin' page for its for admin use only.
-    The following router-link tag will be removed for deployment, it remains here
-    just for showcase purposes.
-      <router-link :to="{ name: 'Admin' }">Admin</router-link> -->
-  </div>
-
 <!-- test code -->
 <!-- end of test code -->
+</div>
 </template>
 
 <script lang="ts">
 import { useRoute } from 'vue-router'
 import { switchLanguage }  from '@/composables/store/store'
-import { inject, defineComponent, computed } from 'vue'
+import { inject, defineComponent, computed, ref } from 'vue'
 import HomeIcon from 'vue-material-design-icons/Home.vue'
 import CodeJsonIcon from 'vue-material-design-icons/CodeJson.vue'
 import HammerScrewdriverIcon from 'vue-material-design-icons/HammerScrewdriver.vue'
@@ -81,12 +89,18 @@ export default defineComponent({
     const iconSize = 30
     const route = useRoute()
     const routeName = computed(() => route.name)
+    const showNavbar = ref(true)
+    const toggleShowNavbar = (): void => {
+      showNavbar.value = !showNavbar.value
+    }
     
     return {
       lang,
       switchLang,
       iconSize,
       routeName,
+      showNavbar,
+      toggleShowNavbar,
     }
   },
   components: {
@@ -100,16 +114,32 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.wrapper {
+  display: flex;
+  flex-direction: row;
+}
 #nav {
   width: 100%;
   margin: 0px;
-  padding: 0px;
-  justify-content: center;
+  padding: 0px 50px;
+  justify-content: space-around;
   align-items: center;
   display: flex;
   background: lightgrey;
 }
-
+.visible {
+  animation: 1s fadeIn forwards;  
+}
+.hidden {
+  animation: 1s fadeOut forwards;
+}
+.logo {
+  justify-self: start;
+}
+.logo-img {
+  width: 90px;
+  height: 90px;
+}
 #nav a {
   font-weight: bold;
   font-size: 1rem;
@@ -117,33 +147,75 @@ export default defineComponent({
   margin: 15px 50px;
   text-decoration: none;
 }
-
-/* #nav a.router-link-exact-active {
-  color: black;
-} */
 .firebrick-text {
   color: firebrick;
 }
-
 .blue-text {
   color: blue;
 }
-
 .orange-text {
   color: orange;
 }
-
 .green-text {
   color: green;
 }
-
 button {
-  margin-left: 150px;
-  background: none;
   border: none;
   font-weight: bold;
-  color: #2c3e50;
-  font-size: .8rem;
+  background: none;
+  font-size: 1rem;
   color: black;
+}
+
+/* animations */
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;    
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+/* media queries */
+@media (max-width: 480px) {
+  .wrapper {
+    max-width: 60px;
+    margin-left: 0;
+    flex-direction: column;
+    justify-items: start;
+    justify-self: left;
+  }
+  #nav {
+    flex-direction: column;
+    padding: 0px;
+  }
+  .logo-img {
+    width: 60px;
+    height: 60px;
+  }
+  button {
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .lang-btn {
+    position: fixed;
+    left: 420px;
+    top: 25px;
+  }
+  .span-tag {
+    display: none;
+  }
 }
 </style>

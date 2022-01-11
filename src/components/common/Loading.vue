@@ -31,21 +31,18 @@ export default {
     align-items: end;
     justify-self: center;
 }
-
 .firebrick {
     background-color: firebrick;
     width: 200px;
     height: 120px;
     animation: 4s infinite firebrick-green;
 }
-
 .orange {
     background-color: orange;
     width: 120px;
     height: 180px;
     animation: 2s infinite orange-black;
 }
-
 .blue {
     display: flex;
     background-color: blue;
@@ -54,21 +51,18 @@ export default {
     align-items: center;
     animation: 5s infinite blue;    
 }
-
 .black {
     background-color: black;
     width: 120px;
     height: 180px;
     animation: 3s infinite orange-black;    
 }
-
 .green {
     width: 200px;
     height: 112px;
     border: solid 8px green;
     animation: 6s infinite firebrick-green;    
 }
-
 .white {
     height: 60px;
     width: 60px;
@@ -76,7 +70,6 @@ export default {
     margin: 0 auto;
     animation: 5s infinite white;
 }
-
 .loading-text {
     position: absolute;
     top: 50%;
@@ -101,7 +94,6 @@ export default {
         transform: translateY(-90px);
     }
 }
-
 @keyframes firebrick-green {
     0% {
         width: 200px;
@@ -113,7 +105,6 @@ export default {
         width: 200px;
     }
 }
-
 @keyframes orange-black {
     0% {
         height: 180px;
@@ -130,7 +121,6 @@ export default {
         width: 120px;
     }
 }
-
 @keyframes blue {
     0% {
         width: 200px;
@@ -145,7 +135,6 @@ export default {
         height: 280px;
     }
 }
-
 @keyframes loading {
     0% {
         opacity: 1;
@@ -155,6 +144,84 @@ export default {
     }
     100% {
         opacity: 1;
+    }
+}
+@keyframes expandLeft {
+    0% {
+        width: 50px;
+        height: 60px;
+    }
+    50% {
+        width: 250px;
+        height: 100px;
+    }
+    70% {
+        width: 300px;
+        height: 30px;
+    }
+    100% {
+        width: 50px;
+        height: 60px;
+    }
+}
+@keyframes bouncer {
+    0% {
+        width: 80px;
+        margin-bottom: 0px;
+    }
+    50% {
+        width: 200px;
+        margin-bottom: 580px;
+    }
+    100% {
+        width: 80px;
+        margin-bottom: 0px;
+    }
+}
+
+/* media queries */
+@media (max-width: 480px) {
+    .wrapper {
+        display: block;
+        max-width: 460px;
+        justify-items: center;
+    }
+    .firebrick {
+        margin: 0 auto;
+        height: 60px;
+        animation: 2s expandLeft infinite;        
+    }
+    .orange {
+        margin: 0 auto;
+        height: 60px;
+        animation: 3s expandLeft infinite;        
+    }
+    .blue {
+        margin: 0 auto;        
+        height: 60px;
+        animation: 6s expandLeft infinite;        
+    }
+    .black {
+        margin: 0 auto;        
+        height: 60px;
+        animation: 4s expandLeft infinite;        
+    }
+    .green {
+        width: 100px;
+        height: 30px;
+        position: relative;
+        top: 0;
+        margin-left: auto;
+        margin-right: auto;
+        animation: 6s bouncer infinite;
+    }
+    .white {
+        visibility: none;
+        display: none;
+    }
+    .loading-text {
+        position: relative;
+        top: -120px;
     }
 }
 

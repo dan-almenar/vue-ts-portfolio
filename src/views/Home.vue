@@ -15,3 +15,12 @@ export default defineComponent({
   }
 });
 </script>
+
+<style scoped>
+/* media queries */
+@media (max-width: 480px) {
+  .home {
+    max-width: 460px;
+  }
+}
+</style>

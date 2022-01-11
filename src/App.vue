@@ -32,4 +32,12 @@ export default defineComponent({
   text-align: center;
   color: #2c3e50;
 }
+
+/* media queries */
+@media (max-width: 480px) {
+  #app {
+    max-width: 460px;
+    padding: 20px;
+  }
+}
 </style>

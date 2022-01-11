@@ -34,3 +34,10 @@ pnpm-debug.log*
 /src/composables/useSetDoc/
 /src/composables/useSignIn/
 /src/composables/useGetDocument/
+
+# assets
+/src/assets/
+
+#temporary
+/src/components/home/NameCard.vue
+
