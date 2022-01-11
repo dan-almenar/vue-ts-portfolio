@@ -165,6 +165,7 @@ button {
   background: none;
   font-size: 1rem;
   color: black;
+  cursor: pointer;
 }
 
 /* animations */

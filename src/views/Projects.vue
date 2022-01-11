@@ -1,5 +1,20 @@
 <template>
   <div class="projects">
-    <h1>This is the 'Projects' page</h1>
+    <Projects />
   </div>
 </template>
+
+<script lang="ts">
+import Projects from '@/components/projects/Projects.vue' 
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+    }
+  },
+  components: {
+    Projects,
+  }
+})
+</script>

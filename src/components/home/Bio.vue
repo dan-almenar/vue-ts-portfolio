@@ -15,25 +15,19 @@
         <p>{{ bio.data[lang].shortDescription }}</p>
         </div>
     </div>
-    <div class="body" v-for="str in bio.data[lang].path.split('*n*')" :key="str">
+    <div class="body" v-for="str in useSplit(bio.data[lang].path)" :key="str">
         <p class="path">{{ str }}</p>
     </div>
-    <n-divider />
     <div class="body">
         <p class="achievement">{{ bio.data[lang].lastAchievement }}</p>
-        <n-divider />
         <p class="goals">{{ bio.data[lang].professionalGoals }}</p>
     </div>
     
 </div>
-
-<!-- test code -->
-<!-- end of test code   -->
-
 </template>
 
 <script lang="ts">
-import { NDivider } from 'naive-ui'
+import { useSplit } from '@/composables/useSplit/useSplit'
 import NameCard from '@/components/home/NameCard.vue'
 import Error from '@/components/common/Error.vue'
 import Loading from '@/components/common/Loading.vue'
@@ -51,14 +45,14 @@ export default {
         return {
             bio,
             lang,
-            splitString
+            splitString,
+            useSplit
         }
     },
     components: {
         Loading,
         Error,
         NameCard,
-        NDivider
     }
 
 }
@@ -77,30 +71,25 @@ export default {
     gap: 30px;
     align-items: center;
 }
-
 .title {
     border-left: 4px solid firebrick;
     padding-left: 5%;
     animation: 2s slideIn;
 }
-
 h3 {
     text-align: left;
     color: firebrick;
     font-size: 1.8rem;
 }
-
 h4 {
     text-align: left;
     font-size: 1.3rem;
     color: blue;
 }
-
 .title > p {
     text-align: left;
     font-size: 1rem;
 }
-
 .body {
     max-width: 1100px;
     margin: 25px auto;
@@ -108,7 +97,6 @@ h4 {
     font-size: 1.2rem;
     animation: .8s fadeIn;
 }
-
 .achievement {
     font-weight: bold;
 }
@@ -124,7 +112,6 @@ h4 {
         width: 100%;
     }
 }
-
 @keyframes fadeIn {
     0% {
         opacity: 0;

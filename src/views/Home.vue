@@ -1,7 +1,5 @@
 <template>
-  <div class="home">
     <Bio />
-  </div>
 </template>
 
 <script lang="ts">
@@ -15,12 +13,3 @@ export default defineComponent({
   }
 });
 </script>
-
-<style scoped>
-/* media queries */
-@media (max-width: 480px) {
-  .home {
-    max-width: 460px;
-  }
-}
-</style>
