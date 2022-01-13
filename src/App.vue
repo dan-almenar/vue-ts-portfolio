@@ -5,17 +5,14 @@
 
 <script lang="ts">
 import Navbar from '@/components/common/Navbar.vue'
-import { state, switchLanguage } from '@/composables/store/store'
+import { getters } from '@/composables/store/store'
 import { defineComponent, provide } from 'vue'
 
 export default defineComponent({
   setup() {
-    const switchLang = switchLanguage
-  
-    provide('lang', state.lang)
+    provide('lang', getters.lang())
     
     return {
-      switchLang
     }
   },
   components: {

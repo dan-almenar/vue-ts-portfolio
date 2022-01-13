@@ -1,4 +1,4 @@
-# dan-almenar
+# Vue Typescript Portfolio
 This project serves as a replacement for my current portfolio which you can visit following [this link](https://dan-developer.web.app).
 
 Both apps are build using VueJS and Firebase, yet there are major differences between them:
