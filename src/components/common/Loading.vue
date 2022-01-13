@@ -164,18 +164,15 @@ export default {
         height: 60px;
     }
 }
-@keyframes bouncer {
+@keyframes leftToRight {
     0% {
-        width: 80px;
-        margin-bottom: 0px;
+        transform: translateX(-100px);
     }
     50% {
-        width: 200px;
-        margin-bottom: 580px;
+        transform: translateX(100px);
     }
     100% {
-        width: 80px;
-        margin-bottom: 0px;
+        transform: translateX(-100px);
     }
 }
 
@@ -189,7 +186,7 @@ export default {
     .firebrick {
         margin: 0 auto;
         height: 60px;
-        animation: 2s expandLeft infinite;        
+        animation: 4s leftToRight infinite;
     }
     .orange {
         margin: 0 auto;
@@ -199,7 +196,7 @@ export default {
     .blue {
         margin: 0 auto;        
         height: 60px;
-        animation: 6s expandLeft infinite;        
+        animation: 2s leftToRight infinite;        
     }
     .black {
         margin: 0 auto;        
@@ -207,13 +204,13 @@ export default {
         animation: 4s expandLeft infinite;        
     }
     .green {
-        width: 100px;
+        width: 200px;
         height: 30px;
         position: relative;
         top: 0;
         margin-left: auto;
         margin-right: auto;
-        animation: 6s bouncer infinite;
+        animation: 6s leftToRight infinite;
     }
     .white {
         visibility: none;

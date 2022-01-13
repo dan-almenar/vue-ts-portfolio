@@ -7,12 +7,14 @@
       <Error :err="user.err" />
     </div>
     <div v-else class="user">
-      <h1>Welcome, {{ user.user.email }}</h1>
+      <h1>Welcome, Admin</h1>
+      <p>({{ user.user.email }})</p>
     </div>
   </div>
 </template>
 
 <script lang="ts">
+import Loading from '@/components/common/Loading.vue'
 import { getters } from '@/composables/store/store'
 import Error from '@/components/common/Error.vue'
 import Login from '@/components/admin/Login.vue'
@@ -29,6 +31,7 @@ export default defineComponent({
   components: {
     Login,
     Error,
+    Loading
   }
 })
 </script>
