@@ -1,5 +1,5 @@
 <template>
-<div class="login">
+<div v-if="!loginLoading" class="login">
     <form @submit.prevent="login" method="post" autocomplete="true">
         <div class="form-group">
             <input type="email" class="form-control" id="email" v-model="email"
@@ -12,17 +12,21 @@
         <button type="submit" class="btn">{{ lang === 'english' ? 'Login' : 'Ingresar'}}</button>
     </form>
 </div>
+<div v-else class="loading">
+    <Loading />
+</div>
   
 </template>
 
 <script lang=ts>
-import { setUser } from '@/composables/store/store'
+import Loading from '@/components/common/Loading.vue'
 import { inject, Ref, ref } from 'vue'
 import { useSignIn } from '@/composables/useSignIn/useSignIn'
 import { FirebaseUser } from '@/customTypes/customTypes'
 export default {
     name: 'Login',
     setup() {
+        const loginLoading = ref(false)
         const email = ref('')
         const password = ref('')
         const lang = inject('lang')
@@ -30,6 +34,7 @@ export default {
             const user: Ref<FirebaseUser> = useSignIn(email.value, password.value)
             email.value = ''
             password.value = ''
+            loginLoading.value = true
             
         }
         return {
@@ -37,7 +42,11 @@ export default {
             lang,
             email,
             password,
+            loginLoading,
         }
+    },
+    components: {
+        Loading,
     }
 }
 </script>
