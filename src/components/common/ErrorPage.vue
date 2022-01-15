@@ -11,7 +11,7 @@
 // needs to be fixed
 import { ref } from 'vue'
 export default {
-    name: 'Error',
+    name: 'ErrorPage',
     props: {
         err: {
             type: Error,

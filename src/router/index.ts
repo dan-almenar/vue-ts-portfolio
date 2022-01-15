@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
 import Admin from '@/views/Admin.vue'
+import AdminComments from '@/views/AdminComments.vue'
 import Projects from '@/views/Projects.vue'
 import LangsAndTools from '@/views/LangsAndTools.vue'
 
@@ -23,13 +24,16 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Admin',
     component: Admin
   },
-
+  {
+    path: '/admin/comments',
+    name: 'Comments',
+    component: AdminComments
+  },
   {
     path: '/projects',
     name: 'Projects',
     component: Projects
   },
-
   {
     path: '/langs-and-tools',
     name: 'LangsAndTools',

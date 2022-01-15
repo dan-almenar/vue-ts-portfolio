@@ -23,7 +23,7 @@ pnpm-debug.log*
 *.sw?
 
 # customTypes file
-/src/customTypes/customTypes.ts
+/src/customTypes/
 
 # firebaseConfig and firebaseMiddleware files
 /src/middleware/firebase/firebaseConfig.ts

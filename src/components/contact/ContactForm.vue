@@ -1,18 +1,19 @@
 <template>
-  
+    <div>
+    <!-- component under development -->
+    </div>
 </template>
 
 <script lang="ts">
 import { Ref, ref } from 'vue'
 import { ContactFormInput, SaveDocumentStatus } from '@/customTypes/customTypes'
-import { useSetDoc } from '@/composables/useSetDoc/useSetDoc'
+import { useSetComment } from '@/composables/useSetDocument/useSetDocument'
 export default {
     setup(){
         const name: Ref<string> = ref('')
         const email: Ref<string> = ref('')
         const message: Ref<string> = ref('')
 
-        const { doc, setDocFunc } = useSetDoc()
 
         const submit = (): void => {
             const formInput: Ref<ContactFormInput> = ref({
@@ -22,7 +23,7 @@ export default {
                 date: new Date(Date.now())
             })
 
-            setDocFunc(formInput)
+            const saveOK: Ref<SaveDocumentStatus> = useSetComment(formInput)
             
             name.value = ''
             email.value = ''
@@ -34,7 +35,6 @@ export default {
             email,
             message,
             submit,
-            doc,
         }
     }
 

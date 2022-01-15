@@ -3,7 +3,7 @@
     <Loading />
 </div>
 <div v-else-if="bio.err">
-    <Error :err="bio.err" />
+    <ErrorPage :err="bio.err" />
 </div>
 <div v-else class="bio">
 
@@ -29,7 +29,7 @@
 <script lang="ts">
 import { useSplit } from '@/composables/useSplit/useSplit'
 import NameCard from '@/components/home/NameCard.vue'
-import Error from '@/components/common/Error.vue'
+import ErrorPage from '@/components/common/ErrorPage.vue'
 import Loading from '@/components/common/Loading.vue'
 import { useGetBio } from '@/composables/useGetDocument/useGetDocument'
 import { FirebaseData } from '@/customTypes/customTypes'
@@ -51,7 +51,7 @@ export default {
     },
     components: {
         Loading,
-        Error,
+        ErrorPage,
         NameCard,
     }
 

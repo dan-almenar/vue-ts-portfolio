@@ -4,7 +4,7 @@
       <Login />
     </div>
     <div v-else-if="user.err" class="err">
-      <Error :err="user.err" />
+      <ErrorPage :err="user.err" />
     </div>
     <div v-else class="user">
       <h1>{{ lang === 'english' ? 'Admin area' : 'Área de admin'}}</h1>
@@ -22,21 +22,22 @@
 </template>
 
 <script lang="ts">
+import { useRouter } from 'vue-router'
 import { useGetComments } from "@/composables/useGetDocuments/useGetDocuments";
-// import Loading from '@/components/common/Loading.vue'
 import { getters } from "@/composables/store/store";
-import Error from "@/components/common/Error.vue";
+import ErrorPage from "@/components/common/ErrorPage.vue";
 import Login from "@/components/admin/Login.vue";
 import { defineComponent, Ref } from "vue";
 import { FirebaseUser } from "@/customTypes/customTypes";
 
 export default defineComponent({
   setup() {
+    const router = useRouter()
     const lang = getters.lang();
     const documents = useGetComments();
     const user: Ref<FirebaseUser> = getters.user();
     const loadComments = (): void => {
-      console.log("load comments");
+      router.push({name: 'Comments'})
     };
     const createProject = (): void => {
       console.log("create project");
@@ -51,7 +52,7 @@ export default defineComponent({
   },
   components: {
     Login,
-    Error,
+    ErrorPage,
     // Loading
   },
 });
@@ -78,6 +79,7 @@ export default defineComponent({
 }
 .user {
   line-height: .7rem;
+    margin-top: 50px;
 }
 .user > h1 {
   font-size: 2.4rem;
