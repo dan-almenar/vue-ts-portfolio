@@ -22,11 +22,12 @@
         <p class="achievement">{{ bio.data[lang].lastAchievement }}</p>
         <p class="goals">{{ bio.data[lang].professionalGoals }}</p>
     </div>
-    
+    <TimeLine />
 </div>
 </template>
 
 <script lang="ts">
+import TimeLine from '@/components/home/TimeLine.vue'
 import { useSplit } from '@/composables/useSplit/useSplit'
 import NameCard from '@/components/home/NameCard.vue'
 import ErrorPage from '@/components/common/ErrorPage.vue'
@@ -53,6 +54,7 @@ export default {
         Loading,
         ErrorPage,
         NameCard,
+        TimeLine,
     }
 
 }

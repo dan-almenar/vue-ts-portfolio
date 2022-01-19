@@ -9,14 +9,12 @@
     <div v-else class="user">
       <h1>{{ lang === 'english' ? 'Admin area' : 'Área de admin'}}</h1>
       <p>({{ user.user.email }})</p>
-      <!-- test code -->
       <button @click="loadComments" class="btn">
         {{ lang === "english" ? "See comments" : "Ver comentarios" }}
       </button>
       <button @click="createProject" class="btn">
         {{ lang === "english" ? "Create Project" : "Crear Proyecto" }}
       </button>
-      <!-- end of test code -->
     </div>
   </div>
 </template>
@@ -37,10 +35,10 @@ export default defineComponent({
     const documents = useGetComments();
     const user: Ref<FirebaseUser> = getters.user();
     const loadComments = (): void => {
-      router.push({name: 'Comments'})
+      router.push({name: 'AdminComments'})
     };
     const createProject = (): void => {
-      console.log("create project");
+      router.push({name: 'AdminCreateProject'})
     };
     return {
       user,
@@ -53,7 +51,6 @@ export default defineComponent({
   components: {
     Login,
     ErrorPage,
-    // Loading
   },
 });
 </script>

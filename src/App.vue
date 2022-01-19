@@ -1,9 +1,11 @@
 <template>
   <Navbar />
   <router-view/>
+  <Footer />
 </template>
 
 <script lang="ts">
+import Footer from '@/components/common/Footer.vue'
 import Navbar from '@/components/common/Navbar.vue'
 import { getters } from '@/composables/store/store'
 import { defineComponent, provide } from 'vue'
@@ -17,6 +19,7 @@ export default defineComponent({
   },
   components: {
     Navbar,
+    Footer,
   }
 })
 </script>
