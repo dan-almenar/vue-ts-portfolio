@@ -12,12 +12,15 @@
       </div>
       <div class="comments-success" v-else>
           <!-- to be changed -->
-          <p>{{ comments }}</p>
+          <div class="comment" v-for="comment in comments.data" :key="comment.date">
+              <Comment :commentData="comment" />
+          </div>
       </div>
   </div>
 </template>
 
 <script lang="ts">
+import Comment from '@/components/admin/Comment.vue'
 import Loading from '@/components/common/Loading.vue'
 import { useGetComments } from '@/composables/useGetDocuments/useGetDocuments'
 import { getters } from '@/composables/store/store'
@@ -40,6 +43,7 @@ export default {
     components: {
         ErrorPage,
         Loading,
+        Comment,
     }
 }
 </script>
