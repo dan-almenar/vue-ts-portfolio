@@ -31,22 +31,22 @@ import { FirebaseUser } from "@/customTypes/customTypes";
 export default defineComponent({
   setup() {
     const router = useRouter()
-    const lang = getters.lang();
-    const documents = useGetComments();
-    const user: Ref<FirebaseUser> = getters.user();
+    const lang = getters.lang()
+    const documents = useGetComments()
+    const user: Ref<FirebaseUser> = getters.user()
     const loadComments = (): void => {
       router.push({name: 'AdminComments'})
-    };
+    }
     const createProject = (): void => {
       router.push({name: 'AdminCreateProject'})
-    };
+    }
     return {
       user,
       documents,
       lang,
       loadComments,
       createProject,
-    };
+    }
   },
   components: {
     Login,

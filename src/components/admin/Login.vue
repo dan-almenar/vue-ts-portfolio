@@ -9,6 +9,8 @@
             <input type="password" class="form-control" id="password" v-model="password"
             :placeholder="lang === 'english' ? 'Enter your password' : 'Ingrese su contraseña'">
         </div>
+        <!-- test code -->
+        <!-- end of test code -->
         <button type="submit" class="btn">{{ lang === 'english' ? 'Login' : 'Ingresar'}}</button>
     </form>
 </div>
@@ -20,16 +22,16 @@
 
 <script lang=ts>
 import Loading from '@/components/common/Loading.vue'
-import { inject, Ref, ref } from 'vue'
+import { computed, inject, Ref, ref } from 'vue'
 import { useSignIn } from '@/composables/useSignIn/useSignIn'
-import { FirebaseUser } from '@/customTypes/customTypes'
+import { FirebaseUser, Language } from '@/customTypes/customTypes'
 export default {
     name: 'Login',
     setup() {
         const loginLoading = ref(false)
         const email = ref('')
         const password = ref('')
-        const lang = inject('lang')
+        const lang = inject('lang') as Ref<Language>
         const login = (): void => {
             const user: Ref<FirebaseUser> = useSignIn(email.value, password.value)
             email.value = ''
@@ -37,12 +39,17 @@ export default {
             loginLoading.value = true
             
         }
+        const btnTag = computed(() => {
+            const tag = lang.value === 'english' ? 'test button' : 'botón de prueba'
+            return tag
+        })
         return {
             login,
             lang,
             email,
             password,
             loginLoading,
+            btnTag,
         }
     },
     components: {

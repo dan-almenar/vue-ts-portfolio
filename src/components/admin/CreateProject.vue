@@ -1,35 +1,164 @@
 <template>
-  <div class="create-project-form">
-      <form @submit.prevent="createProject" method="post" autocomplete="true">
-          <!-- TODO: add necessary fields -->
-          <button type="submit">{{ btnTag }}</button>
-      </form>
-  </div>
+      <div v-if="!isSecondForm" class="regular-form">
+          <h4>{{ formTitle }}</h4>
+        <input type="text"
+            v-model="title"
+            required
+            :placeholder="titlePlaceholder"><br>
+        <textarea type="text"
+            v-model="description"
+            :placeholder="descriptionPlaceholder"
+            required
+            maxlength="500" /><br>
+        <input type="text"
+            v-model="tools"
+            required
+            :placeholder="toolsPlaceholder"><br>
+        <input type="text"
+            v-model="platform"
+            required
+            :placeholder="platformPlaceholder"><br>
+        <input type="text"
+            v-model="url"
+            required
+            placeholder="url"><br>
+      </div>
+      <div v-else class="extended-form">
+          <h4>{{ formTitle }}</h4>
+        <input v-if="isSecondForm"
+            type="text"
+            v-model="titleSecondForm"
+            required
+            :placeholder="titlePlaceholder"><br>
+        <textarea
+            v-model="descriptionSecondForm"
+            required
+            maxlength="500"
+            :placeholder="descriptionPlaceholder" /><br>
+      </div>
 </template>
 
 <script lang="ts">
-import { inject, computed, ComputedRef, Ref } from 'vue'
+import { updateTitle, updateDescription, updateLangsAndTools, updateLinks } from '@/composables/createProjectHandler/createProjectHandler'
+import { inject, Ref, computed, ComputedRef, ref, watch, unref } from 'vue'
 import { Language } from '@/customTypes/customTypes'
 export default {
     name: 'CreateProject',
-    setup(){
-        const createProject:() => void = () => {
-            console.log('create project')
+    props: {
+        isSecondForm: {
+            type: Boolean,
+            required: true,
+            default: false
         }
-        const lang: Ref<Language> = inject('lang') as Ref<Language>
-        const btnTag: ComputedRef<string> = computed(() => {
-            const tag = lang.value === 'english' ? 'Create Project' : 'Crear Proyecto'
-            return tag
+    },
+    setup(props: any){
+        const isSecondForm = props.isSecondForm as boolean
+        const lang = inject('lang') as Ref<Language>
+        const title: Ref<string> = ref('')
+        const titleSecondForm: Ref<string> = ref('')
+        const description: Ref<string> = ref('')
+        const descriptionSecondForm: Ref<string> = ref('')
+        const tools: Ref<string> = ref('')
+        const platform: Ref<string> = ref('')
+        const url: Ref<string> = ref('')
+
+        // computed
+        const useLang: ComputedRef<Language> = computed(() => {
+            if (isSecondForm === true) {
+                return lang.value === 'english' ? 'spanish' : 'english'
+            } else {
+                return lang.value
+            }
         })
+        const titlePlaceholder: ComputedRef<string> = computed(()=> {
+            return useLang.value === 'english' ? 'Title' : 'Título'
+        })
+        const descriptionPlaceholder: ComputedRef<string> = computed(()=> {
+            return useLang.value === 'english' ? 'Description' : 'Descripción'
+        })
+        const toolsPlaceholder: ComputedRef<string> = computed(()=>{
+            return useLang.value === 'english' ? 'Langs and tools' : 'Lenguajes y herramientas'
+        })
+        const platformPlaceholder: ComputedRef<string> = computed(()=>{
+            return useLang.value === 'english' ? 'Platform' : 'Plataforma'
+        })
+        const formTitle: ComputedRef<string> = computed(()=>{
+            return useLang.value === 'english' ? 'English' : 'Español'
+        })
+
+        // watchers:
+        watch(title, () => {
+            updateTitle(unref(lang), title)
+        })
+        watch(titleSecondForm, () => {
+            updateTitle(unref(lang), titleSecondForm)
+        })
+        watch(description, () => {
+            updateDescription(unref(lang), description)
+        })
+        watch(descriptionSecondForm, () => {
+            updateDescription(unref(lang), descriptionSecondForm)
+        })
+        watch(tools, () => {
+            updateLangsAndTools(tools)
+        })
+        watch(platform, () => {
+            updateLinks(ref({platform: platform.value, url: url.value}))
+        })
+        watch(url, () => {
+            updateLinks(ref({platform: platform.value, url: url.value}))
+        })
+
         return {
-            lang,
-            createProject,
-            btnTag,
+            useLang,
+            title,
+            titleSecondForm,
+            description,
+            descriptionSecondForm,
+            tools,
+            platform,
+            url,
+            titlePlaceholder,
+            descriptionPlaceholder,
+            toolsPlaceholder,
+            platformPlaceholder,
+            formTitle,
         }
     }
 }
 </script>
 
-<style>
+<style scoped>
+input, textarea {
+    margin: 5px auto;
+    width: 275px;
+    height: 40px;
+    font-size: 1.2rem;
+    padding-left: 25px;
+    border-radius: 8px;
+    outline: none;
+    border: 2px solid blue;
+    font-family: Helvetica;
+}
+input:focus, textarea:focus {
+    border: 3px solid blue;
+    animation: 1s expand forwards;
+}
+h4 {
+    font-size: 1.4rem;
+    color: firebrick;
+    line-height: .8rem;
+}
+/* animations */
+@keyframes expand {
+    0% {
+        transform: scale(0.8);
+        width: 300px;
 
+    }
+    100% {
+        transform: scale(1);
+        width: 350px;
+    }
+}
 </style>

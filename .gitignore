@@ -36,6 +36,7 @@ pnpm-debug.log*
 /src/composables/useGetDocument/
 /src/composables/useGetDocuments/
 /src/composables/useSplit/
+/src/composables/createProjectHandler/
 
 # assets
 /src/assets/
