@@ -3,13 +3,13 @@
       <ErrorPage :err="forbidden" />
     </div>
     <div v-else>
-      <div v-if="saveOK.loading">
+      <div v-if="isLoading">
         <Loading />
       </div>
       <div v-else-if="saveOK.error">
         <ErrorPage :err="badGateway" />
       </div>
-      <div v-if="!saveOK.loading && !saveOK.error">
+      <div v-if="!isLoading && !saveOK.error">
         <div class="create-project-form">
           <n-switch v-model:value="bilingual"
           :rail-style="railStyle"
@@ -53,7 +53,6 @@ import { FirebaseUser, Language, SaveDocumentStatus } from '@/customTypes/custom
 export default {
   setup(){
     const isLoading: Ref<boolean> = ref(false)
-    const isError: Ref<boolean> = ref(false)
     const router = useRouter()
     const lang = inject('lang') as Ref<Language>
     const user: Ref<FirebaseUser> = getters.user()
@@ -112,6 +111,7 @@ export default {
       updateLinks(ref({platform: '', url: ''}))
     }
     const postProject: () => void = () => {
+      isLoading.value = true
       useSetProject()
       clearProjectConstructor()
     }
@@ -119,7 +119,6 @@ export default {
     return {
       saveOK,
       isLoading,
-      isError,
       user,
       forbidden,
       bilingual,

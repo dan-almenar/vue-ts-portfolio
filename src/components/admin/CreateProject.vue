@@ -79,7 +79,7 @@ export default {
             return useLang.value === 'english' ? 'Description' : 'Descripción'
         })
         const toolsPlaceholder: ComputedRef<string> = computed(()=>{
-            return useLang.value === 'english' ? 'Langs and tools' : 'Lenguajes y herramientas'
+            return useLang.value === 'english' ? 'Langs and tools (comma separated)' : 'Lenguajes y herramientas (separados por comas)'
         })
         const platformPlaceholder: ComputedRef<string> = computed(()=>{
             return useLang.value === 'english' ? 'Platform' : 'Plataforma'
@@ -112,7 +112,9 @@ export default {
         })
         watch(clearProjectForm, () => {
             title.value = ''
+            titleSecondForm.value = ''
             description.value = ''
+            descriptionSecondForm.value = ''
             tools.value = ''
             platform.value = ''
             url.value = ''

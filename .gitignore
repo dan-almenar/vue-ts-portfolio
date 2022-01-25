@@ -42,5 +42,3 @@ pnpm-debug.log*
 /src/assets/
 
 #temporary
-/src/components/home/NameCard.vue
-
