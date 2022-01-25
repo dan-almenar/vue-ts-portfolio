@@ -105,7 +105,7 @@ export default {
     })
 
     // button handler
-    const clearForm: () => void = () => {
+    const clearProjectConstructor: () => void = () => {
       updateTitle(unref(lang), ref(''))
       updateDescription(unref(lang), ref(''))
       updateLangsAndTools(ref(''))
@@ -113,7 +113,7 @@ export default {
     }
     const postProject: () => void = () => {
       useSetProject()
-      clearForm()
+      clearProjectConstructor()
     }
 
     return {

@@ -39,6 +39,7 @@
 </template>
 
 <script lang="ts">
+import { getters } from '@/composables/store/store'
 import { updateTitle, updateDescription, updateLangsAndTools, updateLinks } from '@/composables/createProjectHandler/createProjectHandler'
 import { inject, Ref, computed, ComputedRef, ref, watch, unref } from 'vue'
 import { Language } from '@/customTypes/customTypes'
@@ -52,6 +53,7 @@ export default {
         }
     },
     setup(props: any){
+        const clearProjectForm: Ref<boolean> = getters.clearProjectForm()
         const isSecondForm = props.isSecondForm as boolean
         const lang = inject('lang') as Ref<Language>
         const title: Ref<string> = ref('')
@@ -107,6 +109,13 @@ export default {
         })
         watch(url, () => {
             updateLinks(ref({platform: platform.value, url: url.value}))
+        })
+        watch(clearProjectForm, () => {
+            title.value = ''
+            description.value = ''
+            tools.value = ''
+            platform.value = ''
+            url.value = ''
         })
 
         return {
