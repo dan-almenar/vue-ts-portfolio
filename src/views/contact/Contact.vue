@@ -8,6 +8,7 @@
       <ErrorPage :err="saveOK.error"/>
     </div>
     <div v-else-if="saveOK.status === 200" class="save-ok">
+      <!-- needs styling -->
       <p>Your comment has been sent.</p>
       <p>Redirecting to Home page...</p>
     </div>
