@@ -1,24 +1,25 @@
 <template>
   <h1>{{ lang === 'english' ? 'Contact' : 'Contacto' }}</h1>
   <div class="contact">
-    <div v-if="isLoading" class="loading">
+    <div v-if="saveOK.loading" class="loading">
       <Loading />
     </div>
-    <div v-if="isSavingComment && saveOK.error" class="error">
-      <ErrorPage :err="badGateway"/>
+    <div v-else-if="saveOK.error" class="error">
+      <ErrorPage :err="saveOK.error"/>
     </div>
-    <div v-if="!isLoading && !isSavingComment" class="comment-form">
+    <div v-else-if="saveOK.status === 200" class="save-ok">
+      <p>Your comment has been sent.</p>
+      <p>Redirecting to Home page...</p>
+    </div>
+    <div v-else class="contact-form">
       <ContactForm />
-      <!-- NOTE MOVE BUTTON TO CONTACTFORM COMPONENT -->
-      <button>
-        {{ lang === 'english' ? 'Send' : 'Enviar' }}
-      </button>
-    </div>    
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, ref, Ref } from 'vue'
+import{ Router, useRouter } from 'vue-router'
+import { defineComponent, inject, Ref, watch } from 'vue'
 import { errors } from '@/customTypes/Errors'
 import { getters } from '@/composables/store/store'
 import { SaveDocumentStatus } from '@/customTypes/customTypes'
@@ -29,14 +30,21 @@ import ContactForm from '@/components/contact/ContactForm.vue'
 
 export default defineComponent({
   setup() {
+    const router: Router = useRouter()
     const lang: Ref<Language> = inject('lang') as Ref<Language>
-    const isLoading: Ref<boolean> = ref(false)
-    const isSavingComment: Ref<boolean> =ref(false)
     const badGateway: Error = errors.badGateway
     const saveOK: Ref<SaveDocumentStatus> = getters.saveOK()
+
+    watch(saveOK, (oldVal, newVal) => {
+      // oldVal.loading === false && newVal.status === 200 means the
+      // comment was succesfully saved to the database
+      if(oldVal.loading === false && newVal.status === 200) {
+        console.log('redirecting...')
+        router.push({name: 'Home'})
+      }
+    })
+
     return {
-      isLoading,
-      isSavingComment,
       saveOK,
       badGateway,
       lang,
@@ -50,36 +58,5 @@ export default defineComponent({
 })
 </script>
 <style scoped>
-.btn {
-    margin-top: 15px;
-    width: 300px;
-    height: 40px;
-    font-size: 1.2rem;
-    border: 2px solid blue;
-    border-radius: 8px;
-    background: none;
-    color: blue;
-    outline: none;
-    cursor: pointer;
-}
-.btn:hover{
-    animation: .5s expand forwards;
-    color: snow;
-    background-color: blue;
-    font-weight: bold;
-    font-size: 1.3rem;
-}
 
-/* animations */
-@keyframes expand {
-    0% {
-        transform: scale(0.8);
-        width: 300px;
-
-    }
-    100% {
-        transform: scale(1);
-        width: 350px;
-    }
-}
 </style>

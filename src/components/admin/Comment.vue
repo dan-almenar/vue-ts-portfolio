@@ -37,7 +37,7 @@ export default {
     border-radius: 8px;
     padding: 30px;
     padding-top: 0px;
-    margin: 10px auto;
+    margin: 15px auto;
     text-align: left;
 }
 .name {
