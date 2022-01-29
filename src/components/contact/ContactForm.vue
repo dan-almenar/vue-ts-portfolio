@@ -1,19 +1,22 @@
 <template>
     <div class="contact-form">
+        <form @submit="submit" method="post">
         <input type="text" v-model="name" :placeholder="lang === 'english' ? 'Name' : 'Nombre'" required>
         <br><input type="email" v-model="email" placeholder="email" required>
         <br><textarea
-            :class="message.length >= 40 ? 'expanded' : ''"
+            :class="textAreaClass"
             v-model="message" :placeholder="lang === 'english' ? 'Write your comment here' : 'Escriba su mensaje acá'" :maxlength="maxCharacters" required />
-        <br><span
-            :class="remainingCharacters < maxCharacters ? 'remaining' : 'hidden'">
+        <p
+            :class="remainingCharactersClass">
             {{ remainingCharacters }}
-        </span>
-    </div>
-    <div class="submit">
-      <button @click="submit" class="btn">
+        </p>
+      <br><button class="btn">
         {{ lang === 'english' ? 'Send' : 'Enviar' }}
       </button>        
+        </form>
+    </div>
+    <div class="submit">
+
     </div>
 </template>
 
@@ -21,7 +24,7 @@
 import { Ref, ref, inject, ComputedRef, computed } from 'vue'
 import { ContactFormInput, SaveDocumentStatus, Language } from '@/customTypes/customTypes'
 import { useSetComment } from '@/composables/useSetDocument/useSetDocument'
-import { getters, setSaveOK } from '@/composables/store/store'
+import { getters } from '@/composables/store/store'
 
 export default {
     setup(){
@@ -34,6 +37,28 @@ export default {
 
         const remainingCharacters: ComputedRef<number> = computed(() =>{
             return maxCharacters - message.value.length
+        })
+
+        const textAreaClass: ComputedRef<string> = computed(() =>{
+            if (message.value.length >= 30 && message.value.length <= 125){
+                return 'expanded'
+            } else if (message.value.length > 125 && message.value.length <=300) {
+                return 're-expanded'
+            } else if (message.value.length > 300) {
+                return 'max-expanded'
+            } else {
+                return ''
+            }
+        })
+
+        const remainingCharactersClass: ComputedRef<string> = computed(() => {
+            if (remainingCharacters.value === maxCharacters) {
+                return 'hidden'
+            } else if (remainingCharacters.value < 100) {
+                return 'remaining-warning'
+            } else {
+                return 'remaining'
+            }
         })
 
         const clearForm: () => void = () => {
@@ -51,11 +76,11 @@ export default {
             })
 
             useSetComment(formInput)
-            
             clearForm()
         }
 
         return {
+            textAreaClass,
             saveOK,
             lang,
             name,
@@ -64,6 +89,7 @@ export default {
             submit,
             maxCharacters,
             remainingCharacters,
+            remainingCharactersClass,
         }
     }
 
@@ -75,12 +101,46 @@ export default {
     display: none;
 }
 .expanded {
-    height: 300px;
+    width: 350px;
+    height: 100px;
+}
+.re-expanded {
+    width: 350px;
+    height: 260px;
+}
+.max-expanded {
+    width: 350px;
+    height: 440px;
+}
+.remaining {
+    margin: auto;
+    width: 350px;
+    font-size: 1.2rem;
+    color: green;
+    text-align: right;
+    animation: .5s expand forwards;
+}
+.remaining-warning {
+    margin: auto;
+    width: 350px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: firebrick;
+    text-align: right;
+}
+.input-warning {
+    margin: auto;
+    width: 350px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: firebrick;
+    text-align: center;
+
 }
 input, textarea {
     margin: 5px auto;
-    width: 275px;
     height: 40px;
+    width: 280px;
     font-size: 1.2rem;
     padding-left: 25px;
     border-radius: 8px;
@@ -124,9 +184,5 @@ input:focus, textarea:focus {
         width: 350px;
     }
 }
-@keyframes smoothExpand {
-    100% {
-        height: 250;
-    }
-}
+
 </style>

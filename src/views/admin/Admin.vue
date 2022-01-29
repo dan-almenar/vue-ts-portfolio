@@ -10,7 +10,7 @@
       <h1>{{ lang === 'english' ? 'Admin area' : 'Área de admin'}}</h1>
       <p>({{ user.user.email }})</p>
       <button @click="loadComments" class="btn">
-        {{ lang === "english" ? "See comments" : "Ver comentarios" }}
+        {{ lang === "english" ? "Read comments" : "Ver comentarios" }}
       </button>
       <button @click="createProject" class="btn">
         {{ lang === "english" ? "Create Project" : "Crear Proyecto" }}

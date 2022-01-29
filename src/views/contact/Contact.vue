@@ -1,5 +1,5 @@
 <template>
-  <h1>{{ lang === 'english' ? 'Contact' : 'Contacto' }}</h1>
+  <h1>{{ lang === 'english' ? 'Contact me:' : 'Contácteme:' }}</h1>
   <div class="contact">
     <div v-if="saveOK.loading" class="loading">
       <Loading />
@@ -59,5 +59,27 @@ export default defineComponent({
 })
 </script>
 <style scoped>
+h1 {
+  color: green;
+}
+.save-ok {
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.5em;
+  text-align: center;
+  animation: 1.5s fadeIn forwards;
+}
 
+/* animations */
+@keyframes fadeIn {
+  from {
+    margin-top: -150px;
+    opacity: 0;
+  }
+  to {
+    margin-top: 50;
+    opacity: 1;
+  }
+}
 </style>
