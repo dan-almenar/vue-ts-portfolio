@@ -1,4 +1,5 @@
 <template>
+<p>{{ useLang }}</p>
       <div v-if="!isSecondForm" class="regular-form">
           <h4>{{ formTitle }}</h4>
         <input type="text"
@@ -9,7 +10,8 @@
             v-model="description"
             :placeholder="descriptionPlaceholder"
             required
-            maxlength="500" /><br>
+            maxlength="600"
+            :class="textAreaClass"/><br>
         <input type="text"
             v-model="tools"
             required
@@ -33,8 +35,9 @@
         <textarea
             v-model="descriptionSecondForm"
             required
-            maxlength="500"
-            :placeholder="descriptionPlaceholder" /><br>
+            maxlength="600"
+            :placeholder="descriptionPlaceholder"
+            :class="textAreaClass"/><br>
       </div>
 </template>
 
@@ -87,19 +90,43 @@ export default {
         const formTitle: ComputedRef<string> = computed(()=>{
             return useLang.value === 'english' ? 'English' : 'Español'
         })
+        const textAreaClass: ComputedRef<string> = computed(() =>{
+            if (useLang.value === lang.value){
+                if (description.value.length >= 30 && description.value.length <= 125){
+                    return 'expanded'
+                } else if (description.value.length > 125 && description.value.length <=300) {
+                    return 're-expanded'
+                } else if (description.value.length > 300) {
+                    return 'max-expanded'
+                } else {
+                    return ''
+                }
+            } else {
+                if (descriptionSecondForm.value.length >= 30 && descriptionSecondForm.value.length <= 125){
+                    return 'expanded'
+                } else if (descriptionSecondForm.value.length > 125 && descriptionSecondForm.value.length <=300) {
+                    return 're-expanded'
+                } else if (descriptionSecondForm.value.length > 300) {
+                    return 'max-expanded'
+                } else {
+                    return ''
+                }
+            }
+        })
+
 
         // watchers:
         watch(title, () => {
-            updateTitle(unref(lang), title)
+            updateTitle(unref(useLang), title)
         })
         watch(titleSecondForm, () => {
-            updateTitle(unref(lang), titleSecondForm)
+            updateTitle(unref(useLang), titleSecondForm)
         })
         watch(description, () => {
-            updateDescription(unref(lang), description)
+            updateDescription(unref(useLang), ref(description.value.replaceAll('\n', '*n*')))
         })
         watch(descriptionSecondForm, () => {
-            updateDescription(unref(lang), descriptionSecondForm)
+            updateDescription(unref(useLang), ref(descriptionSecondForm.value.replaceAll('\n', '*n*')))
         })
         watch(tools, () => {
             updateLangsAndTools(tools)
@@ -134,12 +161,25 @@ export default {
             toolsPlaceholder,
             platformPlaceholder,
             formTitle,
+            textAreaClass,
         }
     }
 }
 </script>
 
 <style scoped>
+.expanded {
+    width: 350px;
+    height: 100px;
+}
+.re-expanded {
+    width: 350px;
+    height: 260px;
+}
+.max-expanded {
+    width: 350px;
+    height: 440px;
+}
 input, textarea {
     margin: 5px auto;
     width: 275px;

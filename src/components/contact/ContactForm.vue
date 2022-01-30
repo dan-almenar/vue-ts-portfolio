@@ -71,7 +71,7 @@ export default {
             const formInput: Ref<ContactFormInput> = ref({
                 name: name.value,
                 email: email.value,
-                message: message.value,
+                message: message.value.replaceAll('\n', '*n*'),
                 date: Date.now()
             })
 

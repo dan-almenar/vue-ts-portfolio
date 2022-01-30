@@ -7,7 +7,6 @@ The *src/composables/* folder contains all the composable components of the appl
 - The ***src/composables/useGetDocument*** holds the *useGetDocument.ts* file, which defines and exports the *useGetBio*, *useGetProjects* and *useGetSkills* functions. Said functions execute under the hood the firebase/firestore necessary implementations to get each document from the database.
 - The ***src/composables/useGetDocuments*** holds the *useGetDocuments.ts* file, which defines and exports the *useGetComments* function. Said function executes under the hood the firebase/firestore necessary implementations to get a list of all the documents on the 'comments' collection in the database.
 - The ***src/composables/useSplit/useSplit.ts*** composable function is a custom implementation
-of the regular String.split() method. It takes two paramaters: (str: string, regexp: string). The reason for the implementation is because strings stored at
-Firebase Firestore don't allow line breaks, so a regexp had to be added in the database whenever a line break was needed. For this project the new line regexp added is: *n* (so it was defined as the default value for said parameter), yet the funtion takes any string as regexp.
+of the regular String.split() followed by a join() methods. It takes two paramaters: (str: string, regexp: string). The reason for the implementation is because strings stored at Firebase Firestore don't allow line breaks, so a regexp had to be added in the database whenever a line break was needed. For this project the new line regexp added is: *n* (so it was defined as the default value for said parameter), yet the funtion takes any string as regexp.
 
 As more composables are added during the development, they will be added here.
