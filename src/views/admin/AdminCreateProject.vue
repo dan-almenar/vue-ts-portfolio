@@ -98,7 +98,6 @@ export default {
     // watchers:
     watch(saveOK, (oldVal, newVal) => {
       if (oldVal.loading === false && newVal.status === 200) {
-        console.log('status:', newVal.status)
         router.push({name: 'Projects'})
       }
     })
