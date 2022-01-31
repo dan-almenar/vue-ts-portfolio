@@ -2,13 +2,12 @@
 <div class="comment">
     <h3 class="name">{{ comment.name }}</h3>
     <h4 class="email">{{ comment.email }}</h4>
-    <p class="message">{{ useSplit(comment.message) }}</p>
+    <p class="message">{{ comment.message }}</p>
     <span class="date">{{ date }} </span>
 </div>  
 </template>
 
 <script lang="ts">
-import { useSplit } from '@/composables/useSplit/useSplit'
 import { computed, ComputedRef, Ref, ref } from 'vue'
 import { ContactFormInput } from '@/customTypes/customTypes'
 export default {
@@ -25,7 +24,6 @@ export default {
         return {
             comment,
             date,
-            useSplit
         }
     },
 }

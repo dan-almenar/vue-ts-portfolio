@@ -15,9 +15,10 @@
         <p>{{ bio.data[lang].shortDescription }}</p>
         </div>
     </div>
-    <div class="body" v-for="str in useSplit(bio.data[lang].path)" :key="str">
+    <!-- <div class="body" v-for="str in useSplit(bio.data[lang].path)" :key="str">
         <p class="path">{{ str }}</p>
-    </div>
+    </div> -->
+    <div class="body">{{ bio.data[lang].path }}</div>
     <div class="body">
         <p class="achievement">{{ bio.data[lang].lastAchievement }}</p>
         <p class="goals">{{ bio.data[lang].professionalGoals }}</p>
@@ -28,7 +29,6 @@
 
 <script lang="ts">
 import TimeLine from '@/components/home/TimeLine.vue'
-import { useSplit } from '@/composables/useSplit/useSplit'
 import NameCard from '@/components/home/NameCard.vue'
 import ErrorPage from '@/components/common/ErrorPage.vue'
 import Loading from '@/components/common/Loading.vue'
@@ -47,7 +47,6 @@ export default {
             bio,
             lang,
             splitString,
-            useSplit
         }
     },
     components: {
@@ -98,6 +97,7 @@ h4 {
     text-align: left;
     font-size: 1.2rem;
     animation: .8s fadeIn;
+    white-space: pre-line;
 }
 .achievement {
     font-weight: bold;

@@ -123,10 +123,10 @@ export default {
             updateTitle(unref(useLang), titleSecondForm)
         })
         watch(description, () => {
-            updateDescription(unref(useLang), ref(description.value.replaceAll('\n', '*n*')))
+            updateDescription(unref(useLang), description)
         })
         watch(descriptionSecondForm, () => {
-            updateDescription(unref(useLang), ref(descriptionSecondForm.value.replaceAll('\n', '*n*')))
+            updateDescription(unref(useLang), descriptionSecondForm)
         })
         watch(tools, () => {
             updateLangsAndTools(tools)

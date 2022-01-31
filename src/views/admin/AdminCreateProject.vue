@@ -30,6 +30,9 @@
           <button @click="postProject" class="btn">{{ btnTag }}</button>
         </div>
       </div>
+      <div v-if="saveOK.status === 200" class="success">
+        <Redirect :message="redirectMessage" :destination="redirectTo" />
+      </div>
     </div>
 </template>
 
@@ -46,6 +49,7 @@ import { NSwitch } from 'naive-ui'
 import CreateProject from '@/components/admin/CreateProject.vue'
 import ErrorPage from '@/components/common/ErrorPage.vue'
 import Loading from '@/components/common/Loading.vue'
+import Redirect from '@/components/common/Redirect.vue'
 import { computed, ComputedRef, inject, ref, Ref, unref, watch } from 'vue'
 import { getters } from '@/composables/store/store'
 import { errors } from '@/customTypes/Errors'
@@ -72,6 +76,12 @@ export default {
     }
     const bilingualLanguage: ComputedRef<Language> = computed(() =>{
       return lang.value === 'english' ? 'spanish' : 'english'
+    })
+    const redirectMessage: ComputedRef<string> = computed(() => {
+      return lang.value === 'english' ? 'Project successfully created in the database' : 'Proyecto creado satisfactoriamente en la base de datos'
+    })
+    const redirectTo: ComputedRef<string> = computed(() => {
+      return lang.value === 'english' ? 'Projects' : 'Proyectos'
     })
 
     // NSwitch style
@@ -126,6 +136,8 @@ export default {
       railStyle,
       postProject,
       badGateway,
+      redirectMessage,
+      redirectTo,
     }
   },
   components: {
@@ -133,6 +145,7 @@ export default {
     CreateProject,
     NSwitch,
     Loading,
+    Redirect,
   }
 }
 </script>

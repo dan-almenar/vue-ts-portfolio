@@ -8,9 +8,7 @@
       <ErrorPage :err="saveOK.error"/>
     </div>
     <div v-else-if="saveOK.status === 200" class="save-ok">
-      <!-- needs styling -->
-      <p>Your comment has been sent.</p>
-      <p>Redirecting to Home page...</p>
+      <Redirect :message="redirectMessage" :destination="redirectTo" />
     </div>
     <div v-else class="contact-form">
       <ContactForm />
@@ -20,13 +18,14 @@
 
 <script lang="ts">
 import{ Router, useRouter } from 'vue-router'
-import { defineComponent, inject, Ref, watch } from 'vue'
+import { computed, ComputedRef, defineComponent, inject, Ref, watch } from 'vue'
 import { errors } from '@/customTypes/Errors'
 import { getters } from '@/composables/store/store'
 import { SaveDocumentStatus } from '@/customTypes/customTypes'
-import { Language } from 'highlight.js'
+import { Language } from '@/customTypes/customTypes'
 import Loading from '@/components/common/Loading.vue'
 import ErrorPage from '@/components/common/ErrorPage.vue'
+import Redirect from '@/components/common/Redirect.vue'
 import ContactForm from '@/components/contact/ContactForm.vue'
 
 export default defineComponent({
@@ -35,6 +34,12 @@ export default defineComponent({
     const lang: Ref<Language> = inject('lang') as Ref<Language>
     const badGateway: Error = errors.badGateway
     const saveOK: Ref<SaveDocumentStatus> = getters.saveOK()
+    const redirectMessage: ComputedRef<string> = computed(() => {
+      return lang.value == 'english' ? 'Your message has been succesfully sent' : 'Su mensaje se ha enviado correctamente'
+    })
+    const redirectTo: ComputedRef<string> = computed(() => {
+      return lang.value === 'english' ? 'Home' : 'Inicio'
+    })
 
     watch(saveOK, (oldVal, newVal) => {
       // oldVal.loading === false && newVal.status === 200 means the
@@ -49,37 +54,20 @@ export default defineComponent({
       saveOK,
       badGateway,
       lang,
+      redirectMessage,
+      redirectTo,
     }
   },
   components: {
     Loading,
     ErrorPage,
     ContactForm,
+    Redirect,
   }
 })
 </script>
 <style scoped>
 h1 {
   color: green;
-}
-.save-ok {
-  width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 1.5em;
-  text-align: center;
-  animation: 1.5s fadeIn forwards;
-}
-
-/* animations */
-@keyframes fadeIn {
-  from {
-    margin-top: -150px;
-    opacity: 0;
-  }
-  to {
-    margin-top: 50;
-    opacity: 1;
-  }
 }
 </style>
