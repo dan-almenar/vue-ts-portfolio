@@ -39,7 +39,7 @@ export default defineComponent({
 /* animations */
 @keyframes fadeIn {
   from {
-    margin-top: -150px;
+    margin-top: -50px;
     opacity: 0;
   }
   to {

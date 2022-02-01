@@ -26,14 +26,13 @@ import { useGetComments } from '@/composables/useGetDocuments/useGetDocuments'
 import { getters } from '@/composables/store/store'
 import { errors } from '@/customTypes/Errors'
 import ErrorPage from '@/components/common/ErrorPage.vue'
-import { FirebaseUser } from '@/customTypes/customTypes'
+import { FirebaseCollection, FirebaseUser } from '@/customTypes/customTypes'
 import { Ref } from 'vue'
 export default {
     setup(){
         const user: Ref<FirebaseUser> = getters.user()
-        const forbidden = errors.forbidden
-        const comments = useGetComments()
-        console.log('comments:', comments)        
+        const forbidden: Error = errors.forbidden
+        const comments: Ref<FirebaseCollection> = useGetComments()    
         return {
             forbidden,
             user,
