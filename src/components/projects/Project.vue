@@ -1,12 +1,10 @@
 <template>
-<!-- test code -->
-<p>filterByTool: {{ filterByTool }}</p>
-<!-- end of test code -->
     <div class="wrapper" v-if="isVisible">
         <h3 class="title">{{ projectProp.project[lang].title }}</h3>
         <p class="description">{{ projectProp.project[lang].description }}</p>
-        <p class="langs">langsAndTools: {{ projectProp.langsAndTools }}</p>
-        <a class="link" :href="projectProp.links.url">{{ project.links.platform }}</a>
+        <!-- <p class="langs">{{ lang === 'english' ? 'Programming Languages & Tools' : 'Lenguajes y Herramientas de Programación'}}</p> -->
+        <span class="langs" v-for="lang in projectProp.langsAndTools" :key="lang">{{ lang }}</span>
+        <br><br><a class="link" :href="projectProp.links.url"><span class="link-span">Link:</span> {{ project.links.platform }}</a>
     </div>
 </template>
 
@@ -74,6 +72,37 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.wrapper {
+    width: 420px;
+    margin: 15px auto;
+    text-align: left;
+}
+.title {
+    font-size: 2rem;
+    color: blue;
+    margin-top: 40px;
+}
+.description {
+    font-size: 1.4rem;
+    padding-left: 20px;
+    line-height: 2rem;
+    white-space: pre-line;
+}
+.langs {
+    font-size: 1.2rem;
+    color: blue;
+    margin-right: 5px;
+}
+.link {
+    font-size: 1.4rem;
+    color: firebrick;
+    text-decoration: none;
+    font-weight: bold;
+}
+.link-span {
+    color: black;
+    font-size: 1.3rem;
+    font-weight: normal;
+}
 </style>

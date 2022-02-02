@@ -5,17 +5,17 @@
 <div v-if="projects.loading">
     <Loading />
 </div>
-<div v-if="projects.err">
+<div v-else-if="projects.err">
     <ErrorPage :err="badGateway" />
 </div>
-<div v-if="projects.data">
+<div v-else>
     <div class="filters">
         <input type="text" v-model="searchByTool"
             :placeholder="lang === 'english' ? 'Search by Languages & Tools' : 'Buscar por Lenguajes y Herramientas'">
         <br><input type="text" v-model="filterByDescription"
             :placeholder="lang === 'english' ? 'Search for description keyword' : 'Buscar por palabra clave en la descripción'">
     </div>
-    <div v-for="project in projects.data" :key="project.links.url">
+    <div class="projects-wrapper" v-for="project in projects.data" :key="project.links.url">
         <ProjectComponent :project="project" />
     </div>
 </div>
@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { FirebaseCollection, Language, Project } from '@/customTypes/customTypes'
+import { FirebaseCollection, Language } from '@/customTypes/customTypes'
 import { errors } from '@/customTypes/Errors'
 import { provide, inject, ref, Ref, ComputedRef, computed } from 'vue'
 import ProjectComponent from '@/components/projects/Project.vue'
@@ -64,7 +64,44 @@ export default {
 </script>
 
 <style scoped>
-h1, h3 {
+h1 {
     color: blue;
+}
+h3 {
+    color: firebrick;
+}
+.filters {
+    margin-top: 50px;
+}
+.projects-wrapper {
+    margin-top: 25px;
+}
+input {
+    margin: 5px auto;
+    width: 300px;
+    height: 40px;
+    font-size: 1.2rem;
+    padding-left: 25px;
+    border-radius: 8px;
+    outline: none;
+    border: 2px solid blue;
+    font-family: Helvetica;
+}
+input:focus {
+    border: 3px solid blue;
+    animation: 1s expand forwards;
+}
+
+/* animations */
+@keyframes expand {
+    0% {
+        transform: scale(0.8);
+        width: 300px;
+
+    }
+    100% {
+        transform: scale(1);
+        width: 350px;
+    }
 }
 </style>
