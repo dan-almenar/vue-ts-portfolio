@@ -9,36 +9,56 @@
     <ErrorPage :err="badGateway" />
 </div>
 <div v-if="projects.data">
-    <p v-for="project in projects.data" :key="project.links.url">
-        {{ project }}
-    </p>
+    <div class="filters">
+        <input type="text" v-model="searchByTool"
+            :placeholder="lang === 'english' ? 'Search by Languages & Tools' : 'Buscar por Lenguajes y Herramientas'">
+        <br><input type="text" v-model="filterByDescription"
+            :placeholder="lang === 'english' ? 'Search for description keyword' : 'Buscar por palabra clave en la descripción'">
+    </div>
+    <div v-for="project in projects.data" :key="project.links.url">
+        <ProjectComponent :project="project" />
+    </div>
 </div>
 <!-- end of test code -->
 
 </template>
 
 <script lang="ts">
-import { FirebaseCollection, Language } from '@/customTypes/customTypes'
+import { FirebaseCollection, Language, Project } from '@/customTypes/customTypes'
 import { errors } from '@/customTypes/Errors'
-import { inject, Ref } from 'vue'
+import { provide, inject, ref, Ref, ComputedRef, computed } from 'vue'
+import ProjectComponent from '@/components/projects/Project.vue'
 import Loading from '@/components/common/Loading.vue'
 import ErrorPage from '@/components/common/ErrorPage.vue'
 import { useGetProjects } from '@/composables/useGetDocuments/useGetDocuments'
 export default {
     name: 'Projects',
     setup() {
-        const lang = inject('lang') as Language
+        const lang = inject('lang') as Ref<Language>
         const { badGateway } = errors
         const projects: Ref<FirebaseCollection> = useGetProjects()
+        const searchByTool: Ref<string> = ref('')
+        const filterByDescription: Ref<string> = ref('')
+
+        // computed
+        const filterByTool: ComputedRef<string[]> = computed(() => searchByTool.value.split(', '))
+
+        provide('filterByTool', filterByTool)
+        provide('filterByDescription', filterByDescription)
+
+
         return {
             lang,
             badGateway,
             projects,
+            searchByTool,
+            filterByDescription,
         }
     },
     components: {
         Loading,
         ErrorPage,
+        ProjectComponent,
     }
 }
 </script>
