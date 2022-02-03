@@ -23,7 +23,9 @@
         <p class="achievement">{{ bio.data[lang].lastAchievement }}</p>
         <p class="goals">{{ bio.data[lang].professionalGoals }}</p>
     </div>
-    <TimeLine />
+    <div class="timeline">
+        <TimeLine />
+    </div>
 </div>
 </template>
 
@@ -152,6 +154,9 @@ h4 {
         width: 420px;
         position: relative;
         top: -80px;
+    }
+    .timeline {
+        margin-top: -50px;
     }
 }
 </style>

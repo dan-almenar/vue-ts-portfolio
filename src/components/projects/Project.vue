@@ -74,9 +74,10 @@ export default {
 
 <style scoped>
 .wrapper {
-    width: 420px;
+    width: 600px;
     margin: 15px auto;
     text-align: left;
+    animation: 2s fadeIn forwards;
 }
 .title {
     font-size: 2rem;
@@ -104,5 +105,39 @@ export default {
     color: black;
     font-size: 1.3rem;
     font-weight: normal;
+}
+
+/* animations */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* media queries */
+@media (max-width: 480px) {
+    .wrapper {
+        width: 75%;
+    }
+    .title {
+        font-size: 1.6rem;
+    }
+    .description {
+        font-size: 1.2rem;
+        padding-left: 0px;
+        margin-top: -15px;
+    }
+    .langs {
+        font-size: 1rem;
+    }
+    .link {
+        font-size: 1rem;
+    }
+    .link-span {
+        font-size: .9rem;
+    }
 }
 </style>

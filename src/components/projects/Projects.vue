@@ -1,26 +1,25 @@
 <template>
-<h1>{{ lang === 'english' ? 'Projects' : 'Proyectos' }}</h1>
-<h3>{{ lang === 'english' ? 'A review of the proyects I\'ve worked on' : 'Una muestra de los proyectos en los que he trabajado'}}</h3>
-<!-- test code -->
 <div v-if="projects.loading">
     <Loading />
 </div>
-<div v-else-if="projects.err">
-    <ErrorPage :err="badGateway" />
-</div>
-<div v-else>
-    <div class="filters">
-        <input type="text" v-model="searchByTool"
-            :placeholder="lang === 'english' ? 'Search by Languages & Tools' : 'Buscar por Lenguajes y Herramientas'">
-        <br><input type="text" v-model="filterByDescription"
-            :placeholder="lang === 'english' ? 'Search for description keyword' : 'Buscar por palabra clave en la descripción'">
+    <div v-else-if="projects.err">
+        <ErrorPage :err="badGateway" />
     </div>
-    <div class="projects-wrapper" v-for="project in projects.data" :key="project.links.url">
-        <ProjectComponent :project="project" />
-    </div>
+    <div v-else>
+        <div class="header">
+            <h1>{{ lang === 'english' ? 'Projects' : 'Proyectos' }}</h1>
+            <h3>{{ lang === 'english' ? 'A review of the proyects I\'ve worked on' : 'Una muestra de los proyectos en los que he trabajado'}}</h3>
+        </div>
+        <div class="filters">
+            <input type="text" v-model="searchByTool"
+                :placeholder="lang === 'english' ? 'Search by Languages & Tools' : 'Buscar por Lenguajes y Herramientas'">
+            <br><input type="text" v-model="filterByDescription"
+                :placeholder="lang === 'english' ? 'Search for description keyword' : 'Buscar por palabra clave en la descripción'">
+        </div>
+        <div class="projects-wrapper" v-for="project in projects.data" :key="project.links.url">
+            <ProjectComponent :project="project" />
 </div>
-<!-- end of test code -->
-
+</div>
 </template>
 
 <script lang="ts">
@@ -70,8 +69,12 @@ h1 {
 h3 {
     color: firebrick;
 }
+.header {
+    animation: 2s fadeIn forwards;
+}
 .filters {
     margin-top: 50px;
+    animation: 2s fadeIn forwards;
 }
 .projects-wrapper {
     margin-top: 25px;
@@ -102,6 +105,49 @@ input:focus {
     100% {
         transform: scale(1);
         width: 350px;
+    }
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* media queries */
+@media (max-width: 480px) {
+    .header {
+        position: absolute;
+        top: 50px;
+        left: 100px;
+    }
+    .filters {
+        position: absolute;
+        top: 150px;
+        left: 140px;
+    }
+    input {
+        margin: 5px auto;
+        width: 250px;
+        height: 30px;
+        font-size: 1rem;
+        padding-left: 25px;
+        border-radius: 8px;
+        outline: none;
+        border: 2px solid blue;
+        font-family: Helvetica;
+    }
+    input:focus {
+        width: 270px;
+        border: 3px solid blue;
+        animation: none;
+    }
+    .projects-wrapper {
+        position: relative;
+        top: -70px;
+        left: 40px;
     }
 }
 </style>

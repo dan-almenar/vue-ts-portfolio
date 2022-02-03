@@ -182,6 +182,7 @@ export default {
         display: block;
         max-width: 460px;
         justify-items: center;
+        margin-top: 30px;
     }
     .firebrick {
         margin: 0 auto;
@@ -218,7 +219,7 @@ export default {
     }
     .loading-text {
         position: relative;
-        top: -120px;
+        top: -180px;
     }
 }
 

@@ -2,17 +2,24 @@
 <div v-if="!loginLoading" class="login">
     <form @submit.prevent="login" method="post" autocomplete="true">
         <div class="form-group">
-            <input type="email" class="form-control" id="email" v-model="email"
+            <input type="email"
+            :class="[email.length > 0 ? 'expanded' : '', 'form-control']" id="email" v-model="email"
             :placeholder="lang === 'english' ? 'Please enter your email' : 'Ingrese su email'">
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" id="password" v-model="password"
+            <input :type="showPassword ? 'text' : 'password'"
+            :class="[password.length > 0 ? 'expanded' : '', 'form-control']" id="password" v-model="password"
             :placeholder="lang === 'english' ? 'Enter your password' : 'Ingrese su contraseña'">
+            <button @click.prevent="toggleShowPassword" class="eye-icon"><EyeOffIcon 
+            :title="lang === 'english' ? 'Show password' : 'Mostrar contraseña'"
+            size=25
+            fillColor='blue' /></button>
         </div>
         <!-- test code -->
         <!-- end of test code -->
         <button type="submit" class="btn">{{ lang === 'english' ? 'Login' : 'Ingresar'}}</button>
     </form>
+
 </div>
 <div v-else class="loading">
     <Loading />
@@ -25,12 +32,14 @@ import Loading from '@/components/common/Loading.vue'
 import { computed, inject, Ref, ref } from 'vue'
 import { useSignIn } from '@/composables/useSignIn/useSignIn'
 import { FirebaseUser, Language } from '@/customTypes/customTypes'
+import EyeOffIcon from 'vue-material-design-icons/EyeOff.vue'
 export default {
     name: 'Login',
     setup() {
         const loginLoading = ref(false)
         const email = ref('')
         const password = ref('')
+        const showPassword: Ref<boolean> = ref(false) 
         const lang = inject('lang') as Ref<Language>
         const login = (): void => {
             const user: Ref<FirebaseUser> = useSignIn(email.value, password.value)
@@ -43,6 +52,9 @@ export default {
             const tag = lang.value === 'english' ? 'test button' : 'botón de prueba'
             return tag
         })
+        const toggleShowPassword: () => void = () => {
+            showPassword.value = !showPassword.value
+        }
         return {
             login,
             lang,
@@ -50,10 +62,13 @@ export default {
             password,
             loginLoading,
             btnTag,
+            toggleShowPassword,
+            showPassword,
         }
     },
     components: {
         Loading,
+        EyeOffIcon,
     }
 }
 </script>
@@ -74,7 +89,11 @@ input {
 }
 input:focus {
     border: 3px solid blue;
-    animation: 1s expand forwards;
+    animation: .5s expand forwards;
+}
+.expanded {
+    width: 350px;
+    animation: none;
 }
 .btn {
     margin-top: 15px;
@@ -94,6 +113,17 @@ input:focus {
     background-color: blue;
     font-weight: bold;
     font-size: 1.3rem;
+}
+#password {
+    margin-left: 33px;
+}
+.eye-icon {
+    position: relative;
+    top: 5px;
+    left: 10px;
+    cursor: pointer;
+    background: none;
+    border: none;
 }
 
 /* animations */
