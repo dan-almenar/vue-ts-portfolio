@@ -1,4 +1,5 @@
 <template>
+<div class="wrapper">
   <h1>{{ lang === 'english' ? 'Contact me:' : 'Contácteme:' }}</h1>
   <div class="contact">
     <div v-if="saveOK.loading" class="loading">
@@ -14,6 +15,10 @@
       <ContactForm />
     </div>
   </div>
+</div>
+<div class="footer">
+  <Footer />
+</div>
 </template>
 
 <script lang="ts">
@@ -42,8 +47,6 @@ export default defineComponent({
     })
 
     watch(saveOK, (oldVal, newVal) => {
-      // oldVal.loading === false && newVal.status === 200 means the
-      // comment was succesfully saved to the database
       if(oldVal.loading === false && newVal.status === 200) {
         console.log('redirecting...')
         router.push({name: 'Home'})
@@ -69,5 +72,21 @@ export default defineComponent({
 <style scoped>
 h1 {
   color: green;
+}
+.wrapper {
+  margin-bottom: 100px;
+}
+
+/* media queries */
+@media (max-width: 480px){
+  .wrapper {
+    width: 420px;
+    position: absolute;
+    top: 50px;
+    left: 80px;
+  }
+  h1 {
+    font-size: 1.6rem;
+  }
 }
 </style>

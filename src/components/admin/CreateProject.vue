@@ -1,5 +1,4 @@
 <template>
-<p>{{ useLang }}</p>
       <div v-if="!isSecondForm" class="regular-form">
           <h4>{{ formTitle }}</h4>
         <input type="text"
@@ -82,7 +81,7 @@ export default {
             return useLang.value === 'english' ? 'Description' : 'Descripción'
         })
         const toolsPlaceholder: ComputedRef<string> = computed(()=>{
-            return useLang.value === 'english' ? 'Langs and tools (comma separated)' : 'Lenguajes y herramientas (separados por comas)'
+            return useLang.value === 'english' ? 'Langs and tools' : 'Lenguajes y herramientas'
         })
         const platformPlaceholder: ComputedRef<string> = computed(()=>{
             return useLang.value === 'english' ? 'Platform' : 'Plataforma'
@@ -211,5 +210,31 @@ h4 {
         transform: scale(1);
         width: 350px;
     }
+}
+
+/* media queries */
+@media (max-width: 480px){
+    input, textarea {
+        width: 200px;
+        height: 40px;
+        font-size: 1rem;
+        padding-left: 20px;
+    }
+    input:focus, textarea:focus {
+        width: 220px;
+        animation: none;
+    }
+    .expanded {
+        width: 240px;
+        height: 110px;
+    }
+    .re-expanded {
+        width: 240px;
+        height: 270px;
+    }
+    .max-expanded {
+        width: 240px;
+        height: 445px;
+    }    
 }
 </style>

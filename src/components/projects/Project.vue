@@ -74,6 +74,7 @@ export default {
 
 <style scoped>
 .wrapper {
+    border-top: 4px solid firebrick;
     width: 600px;
     margin: 15px auto;
     text-align: left;
@@ -82,7 +83,7 @@ export default {
 .title {
     font-size: 2rem;
     color: blue;
-    margin-top: 40px;
+    margin-top: 15px;
 }
 .description {
     font-size: 1.4rem;

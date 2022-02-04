@@ -1,4 +1,5 @@
 <template>
+<div class="wrapper">
   <div class="error" v-if="!user.user">
       <ErrorPage :err="forbidden" />
   </div>
@@ -11,12 +12,12 @@
             <ErrorPage :err="comments.err" />
       </div>
       <div class="comments-success" v-else>
-          <!-- to be changed -->
           <div class="comment" v-for="comment in comments.data" :key="comment.date">
               <Comment :commentData="comment" />
           </div>
       </div>
   </div>
+</div>
 </template>
 
 <script lang="ts">
@@ -50,6 +51,32 @@ export default {
 <style scoped>
 .load-comments {
     margin-top: 50px;
+}
+.comment {
+    animation: 1s fadeIn forwards;
+}
+
+/* animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* media queries */
+@media (max-width: 480px){
+    .wrapper {
+        width: 420px;
+        position: relative;
+        top: -300px;
+        left: 40px;
+    }
+    .comment {
+        margin-bottom: 50px;
+    }
 }
 
 </style>

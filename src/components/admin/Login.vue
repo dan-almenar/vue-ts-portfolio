@@ -10,13 +10,12 @@
             <input :type="showPassword ? 'text' : 'password'"
             :class="[password.length > 0 ? 'expanded' : '', 'form-control']" id="password" v-model="password"
             :placeholder="lang === 'english' ? 'Enter your password' : 'Ingrese su contraseña'">
-            <button @click.prevent="toggleShowPassword" class="eye-icon"><EyeOffIcon 
-            :title="lang === 'english' ? 'Show password' : 'Mostrar contraseña'"
-            size=25
-            fillColor='blue' /></button>
+            <button @click.prevent="toggleShowPassword" class="eye-icon">
+                <EyeIcon 
+                :title="lang === 'english' ? 'Show password' : 'Mostrar contraseña'"
+                :size="iconSize"
+                fillColor='blue' /></button>
         </div>
-        <!-- test code -->
-        <!-- end of test code -->
         <button type="submit" class="btn">{{ lang === 'english' ? 'Login' : 'Ingresar'}}</button>
     </form>
 
@@ -32,10 +31,11 @@ import Loading from '@/components/common/Loading.vue'
 import { computed, inject, Ref, ref } from 'vue'
 import { useSignIn } from '@/composables/useSignIn/useSignIn'
 import { FirebaseUser, Language } from '@/customTypes/customTypes'
-import EyeOffIcon from 'vue-material-design-icons/EyeOff.vue'
+import EyeIcon from 'vue-material-design-icons/Eye.vue'
 export default {
     name: 'Login',
     setup() {
+        const iconSize = 25
         const loginLoading = ref(false)
         const email = ref('')
         const password = ref('')
@@ -64,11 +64,12 @@ export default {
             btnTag,
             toggleShowPassword,
             showPassword,
+            iconSize,
         }
     },
     components: {
         Loading,
-        EyeOffIcon,
+        EyeIcon,
     }
 }
 </script>
@@ -120,7 +121,7 @@ input:focus {
 .eye-icon {
     position: relative;
     top: 5px;
-    left: 10px;
+    left: 0px;
     cursor: pointer;
     background: none;
     border: none;
@@ -137,5 +138,51 @@ input:focus {
         transform: scale(1);
         width: 350px;
     }
+}
+
+/* media queries */
+@media (max-width: 480px){
+    input {
+        margin: 5px auto;
+        width: 200px;
+        height: 40px;
+        font-size: 1rem;
+        padding-left: 20px;
+        border-radius: 8px;
+        outline: none;
+        border: 2px solid blue;
+    }
+    input:focus {
+        border: 3px solid blue;
+        width: 220px;
+        animation: none;
+    }
+    .expanded {
+        width: 220px;
+        animation: none;
+    }
+    #password {
+        margin-left: 33px;
+    }
+    .btn {
+        margin-top: 15px;
+        width: 220px;
+        height: 40px;
+        font-size: 1.2rem;
+        border: 2px solid blue;
+        border-radius: 8px;
+        background: none;
+        color: blue;
+        outline: none;
+        cursor: pointer;
+    }
+    .btn:hover{
+        animation: none;
+        width: 240px;
+        color: snow;
+        background-color: blue;
+        font-weight: bold;
+        font-size: 1.3rem;
+    }    
 }
 </style>

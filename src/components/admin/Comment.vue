@@ -1,7 +1,7 @@
 <template>
 <div class="comment">
     <h3 class="name">{{ comment.name }}</h3>
-    <h4 class="email">{{ comment.email }}</h4>
+    <h4 class="email"><a :href="mailto=comment.email">{{ comment.email }}</a></h4>
     <p class="message">{{ comment.message }}</p>
     <span class="date">{{ date }} </span>
 </div>  
@@ -38,6 +38,7 @@ export default {
     padding: 30px;
     padding-top: 0px;
     margin: 15px auto;
+    margin-top: 30px;
     text-align: left;
 }
 .name {
@@ -54,5 +55,25 @@ export default {
     font-size: 1.4rem;
     padding-left: 30px;
     white-space: pre-line;
+}
+
+/* media queries */
+@media (max-width: 480px){
+    .comment {
+        width: 200px;
+    }
+    .name {
+        font-size: 1.2rem;
+        line-height: .6rem;
+    }
+    .email {
+        font-size: .8rem;
+        line-height: .5rem;
+    }
+    .message {
+        font-size: 1.2rem;
+        padding-left: 15px;
+        line-height: 1.4rem;
+    }
 }
 </style>

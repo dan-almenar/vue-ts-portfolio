@@ -1,4 +1,5 @@
 <template>
+  <div class="wrapper">
     <div class="error" v-if="!user.user">
       <ErrorPage :err="forbidden" />
     </div>
@@ -34,6 +35,7 @@
         <Redirect :message="redirectMessage" :destination="redirectTo" />
       </div>
     </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -195,5 +197,34 @@ export default {
         transform: scale(1);
         width: 350px;
     }
+}
+
+/* media queries */
+@media (max-width: 480px){
+  .wrapper {
+      position: relative;
+      top: -300px;
+      left: 30px;
+  }
+  .btn {
+        margin-top: 15px;
+        width: 220px;
+        height: 40px;
+        font-size: 1.2rem;
+        border: 2px solid blue;
+        border-radius: 8px;
+        background: none;
+        color: blue;
+        outline: none;
+        cursor: pointer;
+  }
+  .btn:hover{
+        animation: none;
+        width: 240px;
+        color: snow;
+        background-color: blue;
+        font-weight: bold;
+        font-size: 1.3rem;
+  }  
 }
 </style>

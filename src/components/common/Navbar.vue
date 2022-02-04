@@ -67,8 +67,6 @@
       </div>
     <span class="span-tag">{{ lang === 'english' ? 'Español' : 'English' }}</span>
     </button>
-<!-- test code -->
-<!-- end of test code -->
 </div>
 </template>
 

@@ -185,4 +185,50 @@ input:focus, textarea:focus {
     }
 }
 
+/* media queries */
+@media (max-width: 480px){
+    .btn {
+        margin-top: 15px;
+        width: 220px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    .btn:hover{
+        animation: none;
+        width: 240px;
+        font-size: 1.3rem;
+    }
+    input, textarea {
+        margin: 5px auto;
+        width: 200px;
+        height: 40px;
+        font-size: 1rem;
+        padding-left: 20px;
+    }
+    input:focus, textarea:focus {
+        width: 220px;
+        animation: none;
+    }
+    .expanded {
+        width: 240px;
+        height: 110px;
+    }
+    .re-expanded {
+        width: 240px;
+        height: 270px;
+    }
+    .max-expanded {
+        width: 240px;
+        height: 455px;
+    }
+    .remaining {
+        width: 240px;
+        font-size: .9rem;
+        animation: none;
+    }
+    .remaining-warning {
+        width: 240px;
+        font-size: 1.2rem;
+    }    
+}
 </style>

@@ -97,4 +97,12 @@ export default defineComponent({
     width: 350px;
   }
 }
+/* media queries */
+@media (max-width: 480px) {
+  .admin {
+    position: absolute;
+    top: 50px;
+    left: 60px;
+  }
+}
 </style>
