@@ -82,8 +82,8 @@ h1 {
   .wrapper {
     width: 420px;
     position: absolute;
-    top: 50px;
-    left: 80px;
+    top: 80px;
+    left: 20px;
   }
   h1 {
     font-size: 1.6rem;

@@ -203,7 +203,7 @@ export default {
 @media (max-width: 480px){
   .wrapper {
       position: relative;
-      top: -300px;
+      top: -250px;
       left: 30px;
   }
   .btn {

@@ -131,18 +131,19 @@ h4 {
         max-width: 420px;
         grid-template-columns: 1fr;
         position: relative;
-        top: 50px;
-        left: 80px;
+        top: 120px;
+        left: 20px;
     }
     .bio {
-        max-width: 460px;
+        width: 340px;
     }
     .title {
+        width: 300px;
         border-top: 4px solid firebrick;
         border-left: none;
         position: relative;
-        top: -70px;
-        left: -70px;
+        /* top: -50px; */
+        /* left: -50px; */
     }
     .title > h3 {
         font-size: 1.3rem;
@@ -151,12 +152,16 @@ h4 {
         font-size: 1.1rem;
     }
     .body {
-        width: 420px;
+        width: 320px;
         position: relative;
-        top: -80px;
+        top: 80px;
+        left: auto;
     }
     .timeline {
-        margin-top: -50px;
+        width: 320px;
+        margin-top: 80px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 </style>

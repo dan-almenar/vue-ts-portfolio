@@ -1,5 +1,5 @@
 # Vue Typescript Portfolio
-This project serves as a replacement for my current portfolio which you can visit following [this link](https://dan-developer.web.app).
+This project is up and running [here](https://danielalmenar.com). It serves as a replacement for my former portfolio which you can visit following [this link](https://dan-developer.web.app). That said, this portfolio is still subject to changes, specially UI wise.
 
 Both apps are build using VueJS and Firebase, yet there are major differences between them:
 - The first one was my entry point to VueJS, Vuex and Firebase; and even tho fully functional, there are major flaws codewise.
@@ -11,8 +11,9 @@ Both apps are build using VueJS and Firebase, yet there are major differences be
 The reason I didn't simply replace my first portfolio with this one is to showcase my progress with the Vue ecosystem and also to built a TypeScript project from scratch.
 
 ### .gitignore
-Some folders/files had been added to the .gitignore files and will be white flagged at deployment. Others will remain black listed in the .gitignore.
-In every case, the root folder of each file / folder added to the .gitignore will have a README.md file explaining what has been black listed and why.
+Aside node modules, env files, logs and other folders and files that are not meant to be committed to the repository, I added the following to the .gitignore file:
+- ***src/middleware/firebase/firebaseConfig.ts*** which holds sensitive data (i.e. firebase credentials).
+Every other folder and file that was added to the .gitignore list has been white flagged and commited. (Again, with the exception of the default list automatically set by Vue CLI at creation of the project).
 
 ## Project setup
 ```

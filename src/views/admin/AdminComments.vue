@@ -71,8 +71,11 @@ export default {
     .wrapper {
         width: 420px;
         position: relative;
-        top: -300px;
+        top: -230px;
         left: 40px;
+    }
+    h2{
+        width: 340px;
     }
     .comment {
         margin-bottom: 50px;

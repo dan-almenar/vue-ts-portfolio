@@ -12,9 +12,9 @@
         </div>
         <div class="filters">
             <input type="text" v-model="searchByTool"
-                :placeholder="lang === 'english' ? 'Search by Languages & Tools' : 'Buscar por Lenguajes y Herramientas'">
+                :placeholder="lang === 'english' ? 'Search by Languages' : 'Buscar por Lenguajes'">
             <br><input type="text" v-model="filterByDescription"
-                :placeholder="lang === 'english' ? 'Search for description keyword' : 'Buscar por palabra clave en la descripción'">
+                :placeholder="lang === 'english' ? 'Search for description' : 'Buscar por descripción'">
         </div>
         <div class="projects-wrapper" v-for="project in projects.data" :key="project.links.url">
             <ProjectComponent :project="project" />
@@ -120,17 +120,18 @@ input:focus {
 @media (max-width: 480px) {
     .header {
         position: absolute;
+        width: 280px;
         top: 50px;
-        left: 100px;
+        left: 80px;
     }
     .filters {
         position: absolute;
-        top: 150px;
-        left: 140px;
+        top: 140px;
+        left: 100px;
     }
     input {
         margin: 5px auto;
-        width: 250px;
+        width: 200px;
         height: 30px;
         font-size: 1rem;
         padding-left: 25px;
@@ -140,13 +141,13 @@ input:focus {
         font-family: Helvetica;
     }
     input:focus {
-        width: 270px;
+        width: 230px;
         border: 3px solid blue;
         animation: none;
     }
     .projects-wrapper {
         position: relative;
-        top: -70px;
+        top: 20px;
         left: 40px;
     }
 }

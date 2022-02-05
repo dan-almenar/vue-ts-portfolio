@@ -29,7 +29,9 @@
     <span
     :class="[routeName === 'Projects' ? 'blue-text' : '', 'span-tag']">{{ lang === 'english' ? 'Projects' : 'Projectos' }}</span>
     </router-link>
-    <router-link :to="{ name: 'LangsAndTools' }">
+
+    <!-- langsAndTools is set to be released in the future -->
+    <!-- <router-link :to="{ name: 'LangsAndTools' }">
       <div class="icon">
       <HammerScrewdriverIcon
       :title="lang === 'english' ? 'Skills' : 'Habilidades'"
@@ -39,7 +41,8 @@
       </div>
     <span
     :class="[routeName === 'LangsAndTools' ? 'orange-text' : '', 'span-tag']">{{ lang === 'english' ? 'Skills' : 'Habilidades' }}</span>
-    </router-link>
+    </router-link> -->
+
     <router-link :to="{ name: 'Contact' }">
       <div class="icon">
       <EmailIcon
@@ -76,7 +79,7 @@ import { switchLanguage }  from '@/composables/store/store'
 import { inject, defineComponent, computed, ref } from 'vue'
 import HomeIcon from 'vue-material-design-icons/Home.vue'
 import CodeJsonIcon from 'vue-material-design-icons/CodeJson.vue'
-import HammerScrewdriverIcon from 'vue-material-design-icons/HammerScrewdriver.vue'
+// import HammerScrewdriverIcon from 'vue-material-design-icons/HammerScrewdriver.vue'
 import EmailIcon from 'vue-material-design-icons/Email.vue'
 import TranslateIcon from 'vue-material-design-icons/Translate.vue'
 
@@ -104,7 +107,7 @@ export default defineComponent({
   components: {
     HomeIcon,
     CodeJsonIcon,
-    HammerScrewdriverIcon,
+    // HammerScrewdriverIcon,
     EmailIcon,
     TranslateIcon,
   }
@@ -189,7 +192,7 @@ button {
 /* media queries */
 @media (max-width: 480px) {
   .wrapper {
-    max-width: 60px;
+    max-width: 40px;
     margin-left: 0;
     flex-direction: column;
     justify-items: start;
@@ -200,8 +203,8 @@ button {
     padding: 0px;
   }
   .logo-img {
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
   }
   button {
     padding: 0px;
@@ -210,7 +213,7 @@ button {
 
   .lang-btn {
     position: fixed;
-    left: 420px;
+    left: 300px;
     top: 25px;
   }
   .span-tag {

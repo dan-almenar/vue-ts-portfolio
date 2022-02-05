@@ -23,23 +23,23 @@ pnpm-debug.log*
 *.sw?
 
 # customTypes file
-/src/customTypes/
+# /src/customTypes/
 
 # firebaseConfig and firebaseMiddleware files
 /src/middleware/firebase/firebaseConfig.ts
-/src/middleware/firebase/firebaseMiddleware.ts
+# /src/middleware/firebase/firebaseMiddleware.ts
 
 # composables folder inner folders and files (except README.md)
-/src/composables/store/
-/src/composables/useSetDocument/
-/src/composables/useSignIn/
-/src/composables/useGetDocument/
-/src/composables/useGetDocuments/
-/src/composables/useSplit/
-/src/composables/createProjectHandler/
-/src/composables/createCommentHandler/
+# /src/composables/store/
+# /src/composables/useSetDocument/
+# /src/composables/useSignIn/
+# /src/composables/useGetDocument/
+# /src/composables/useGetDocuments/
+# /src/composables/useSplit/
+# /src/composables/createProjectHandler/
+# /src/composables/createCommentHandler/
 
 # assets
-/src/assets/
+# /src/assets/
 
 #temporary
